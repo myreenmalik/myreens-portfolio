@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cause — Myreen Malik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Epilogue:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #F7F4EF; --black: #0A0A0A; --accent: #3D5C45;
+  --gray: #888880; --border: #DEDAD2;
+  --display: 'Bebas Neue', sans-serif; --serif: 'Cormorant Garamond', serif; --body: 'Epilogue', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--black); font-family: var(--body); font-weight: 300; overflow-x: hidden; cursor: none; }
+.cursor { position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); font-size: 20px; transition: font-size .15s; user-select: none; color: var(--accent); mix-blend-mode: multiply; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; background: var(--bg); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: var(--display); font-size: 22px; letter-spacing: 3px; color: var(--black); text-decoration: none; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--black); }
+.page-hero { padding: 160px 48px 80px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; }
+.page-title { font-family: var(--display); font-size: clamp(100px, 18vw, 240px); line-height: 0.82; color: var(--accent); }
+.page-meta { text-align: right; max-width: 280px; }
+.page-meta-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-bottom: 12px; }
+.page-meta-desc { font-size: 13px; line-height: 1.75; color: var(--gray); }
+
+/* IMPACT STRIP — warm parchment so it doesn't look scary */
+.impact-strip { background: #E8E2D8; padding: 64px 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; border-bottom: 3px solid var(--accent); }
+.impact-num { font-family: var(--display); font-size: 64px; color: var(--accent); line-height: 1; }
+.impact-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-top: 8px; line-height: 1.6; }
+
+.cause-section { padding: 80px 48px; }
+.cause-section + .cause-section { border-top: 1px solid var(--border); }
+.sub-eyebrow { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); display: flex; align-items: center; gap: 16px; margin-bottom: 48px; }
+.sub-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.sub-heading { font-family: var(--display); font-size: clamp(48px, 7vw, 88px); line-height: 0.88; margin-bottom: 16px; }
+.sub-subhead { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--gray); margin-bottom: 56px; }
+
+.role-block { display: grid; grid-template-columns: 1fr; gap: 2px; margin-bottom: 2px; }
+.role-block.has-image { grid-template-columns: 1fr 340px; }
+.role-card { border: 1px solid var(--border); padding: 52px; border-left: 4px solid transparent; transition: border-color .3s, background .3s; }
+.role-card:hover { border-left-color: var(--accent); background: #EFF3F0; }
+.role-org { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.role-title { font-family: var(--display); font-size: clamp(26px, 3vw, 42px); line-height: 0.95; margin-bottom: 6px; }
+.role-subtitle { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--gray); margin-bottom: 6px; }
+.role-dates { font-size: 10px; letter-spacing: 1.5px; color: var(--gray); margin-bottom: 24px; }
+.role-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.tag { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); border: 1px solid var(--border); padding: 5px 10px; }
+.role-bullets { list-style: none; }
+.role-bullets li { font-size: 13px; line-height: 1.75; color: var(--gray); padding: 4px 0 4px 20px; position: relative; }
+.role-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+.role-stats { display: flex; gap: 32px; margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+.role-stat-num { font-family: var(--display); font-size: 36px; color: var(--accent); line-height: 1; }
+.role-stat-label { font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); margin-top: 4px; }
+
+.role-photo-panel { background: var(--border); display: flex; flex-direction: column; gap: 2px; }
+.role-photo { flex: 1; position: relative; overflow: hidden; min-height: 140px; display: flex; align-items: center; justify-content: center; }
+.role-photo .img-placeholder { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); }
+.role-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.role-photo-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(10,10,10,0.55); padding: 10px 14px; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: white; }
+
+.upload-hint { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); text-align: center; padding: 12px; border: 1px dashed var(--border); margin-top: 16px; }
+.back-nav { padding: 32px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.back-link { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color .2s; display: inline-flex; align-items: center; gap: 10px; }
+.back-link::before { content: '←'; transition: transform .2s; }
+.back-link:hover { color: var(--black); }
+.back-link:hover::before { transform: translateX(-4px); }
+footer { padding: 24px 48px; display: flex; justify-content: space-between; border-top: 1px solid var(--border); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+<div class="cursor" id="cur">✦</div>
+<nav>
+  <a class="nav-logo" href="index.html">MM</a>
+  <ul class="nav-links">
+    <li><a href="code.html">Code</a></li>
+    <li><a href="craft.html">Craft</a></li>
+    <li><a href="cause.html" class="active">Cause</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-title">CAUSE</div>
+  <div class="page-meta">
+    <div class="page-meta-label">What I Fight For</div>
+    <p class="page-meta-desc">Humanitarian fundraising, event planning, and community leadership — service as responsibility, not convenience.</p>
+  </div>
+</div>
+
+<div class="impact-strip">
+  <div><div class="impact-num">$50K+</div><div class="impact-label">Raised for international humanitarian relief</div></div>
+  <div><div class="impact-num">17</div><div class="impact-label">Humanitarian events planned & executed</div></div>
+  <div><div class="impact-num">60+</div><div class="impact-label">Volunteers coordinated across campaigns</div></div>
+  <div><div class="impact-num">$10K+</div><div class="impact-label">Raised through student council initiatives</div></div>
+</div>
+
+<!-- HUMANITARIAN -->
+<section class="cause-section">
+  <div class="sub-eyebrow">Humanitarian Work</div>
+  <h2 class="sub-heading reveal">WHAT I'VE<br>RAISED.</h2>
+  <p class="sub-subhead">Fundraising for international relief — Palestine, Afghanistan, Syria, and beyond.</p>
+  <div class="role-block has-image reveal">
+    <div class="role-card">
+      <div class="role-org">APA Islamic School · Humanitarian Service Team</div>
+      <div class="role-title">HUMANITARIAN SERVICE TEAM LEAD</div>
+      <div class="role-dates">Jan 2022 – Feb 2025 · 3 yrs 2 mos</div>
+      <div class="role-tags"><span class="tag">Palestine</span><span class="tag">Afghanistan</span><span class="tag">Syria</span><span class="tag">Islamic Relief USA</span></div>
+      <ul class="role-bullets">
+        <li>Spearheaded community-wide fundraising, raising over $50,900 for international relief efforts and engaging hundreds of donors</li>
+        <li>Planned and executed 17 events end-to-end — bake sales, food sales, sports tournaments, community movie nights, and gift basket campaigns</li>
+        <li>Coordinated teams of 60+ student volunteers and led all outreach and promotional efforts</li>
+        <li>Developed data visualizations for national fundraising competitions — 1st place (2023), 3rd place (2022), 4th place (2024)</li>
+      </ul>
+      <div class="role-stats">
+        <div><div class="role-stat-num">$50,900+</div><div class="role-stat-label">Total raised</div></div>
+        <div><div class="role-stat-num">17</div><div class="role-stat-label">Events executed</div></div>
+        <div><div class="role-stat-num">60+</div><div class="role-stat-label">Volunteers</div></div>
+        <div><div class="role-stat-num">1st</div><div class="role-stat-label">National competition 2023</div></div>
+      </div>
+    </div>
+    <div class="role-photo-panel">
+      <div class="role-photo"><div class="img-placeholder">Add photo</div><div class="role-photo-label">Add caption</div></div>
+      <div class="role-photo"><div class="img-placeholder">Add photo</div><div class="role-photo-label">Add caption</div></div>
+      <div class="role-photo"><div class="img-placeholder">Add photo</div><div class="role-photo-label">Add caption</div></div>
+    </div>
+  </div>
+  <p class="upload-hint">→ Replace placeholder divs with &lt;img&gt; tags when you add real photos</p>
+</section>
+
+<!-- STUDENT COUNCIL -->
+<section class="cause-section">
+  <div class="sub-eyebrow">Student Leadership</div>
+  <h2 class="sub-heading reveal">WHAT I'VE<br>LED.</h2>
+  <p class="sub-subhead">From a dormant student council to the most impactful in 27 years of school history.</p>
+  <div class="role-block has-image reveal">
+    <div class="role-card">
+      <div class="role-org">APA Islamic School</div>
+      <div class="role-title">STUDENT COUNCIL PRESIDENT</div>
+      <div class="role-dates">Aug 2024 – May 2025 · 10 mos</div>
+      <div class="role-tags"><span class="tag">Leadership</span><span class="tag">Event Planning</span><span class="tag">Fundraising</span><span class="tag">Merchandising</span></div>
+      <ul class="role-bullets">
+        <li>Drove $10K+ in funding through food sales, ticketed events, and crowdfunding, securing $7K+ for student programs</li>
+        <li>Launched the first-ever StuCo crewneck line in school history — 80+ units sold, $2.4K+ gross profit</li>
+        <li>Managed pep rally logistics, raising $1.4K for the school's athletic programs</li>
+        <li>Introduced parking spot painting, a laser-tag field trip, and a Ramadan iftar — handling concept, budgeting, and volunteer coordination for each</li>
+        <li>Revitalized Spirit Week after a 3-year hiatus, reintroducing Bonfire Night, Basketball Pep Rally, and Poetry Slam</li>
+        <li>Chaired 30+ council meetings: set agendas, delegated tasks, and ensured timely execution</li>
+        <li>Recognized by the principal as the most impactful Student Council in the school's 27-year history</li>
+      </ul>
+      <div class="role-stats">
+        <div><div class="role-stat-num">$10K+</div><div class="role-stat-label">Total funds raised</div></div>
+        <div><div class="role-stat-num">80+</div><div class="role-stat-label">Crewnecks sold</div></div>
+        <div><div class="role-stat-num">$2.4K+</div><div class="role-stat-label">Merch gross profit</div></div>
+        <div><div class="role-stat-num">30+</div><div class="role-stat-label">Meetings chaired</div></div>
+      </div>
+    </div>
+    <div class="role-photo-panel">
+      <div class="role-photo"><div class="img-placeholder">Add photo</div><div class="role-photo-label">Poetry Slam</div></div>
+      <div class="role-photo"><div class="img-placeholder">Add photo</div><div class="role-photo-label">Ramadan Iftar</div></div>
+      <div class="role-photo"><div class="img-placeholder">Add photo</div><div class="role-photo-label">Bonfire Night</div></div>
+    </div>
+  </div>
+  <p class="upload-hint">→ Replace placeholder divs with &lt;img&gt; tags when you add real photos</p>
+</section>
+
+<!-- TEEN PACT -->
+<section class="cause-section">
+  <div class="sub-eyebrow">Teen PACT</div>
+  <h2 class="sub-heading reveal">WHAT I'VE<br>ORGANIZED.</h2>
+  <p class="sub-subhead">Civic engagement, voter outreach, and community fundraising.</p>
+  <div class="role-block reveal">
+    <div class="role-card">
+      <div class="role-org">Teen PACT · Pakistani American Collaborative of Texas</div>
+      <div class="role-title">FOUNDER & PRESIDENT</div>
+      <div class="role-dates">Sep 2020 – May 2025 · 4 yrs 9 mos</div>
+      <div class="role-tags"><span class="tag">Civic Engagement</span><span class="tag">Voter Outreach</span><span class="tag">Fundraising</span><span class="tag">Community</span></div>
+      <ul class="role-bullets">
+        <li>Grew Teen PACT into a volunteer-driven network — coordinating voter outreach, hosting flagship webinars, and raising $10K+ for relief and refugee support</li>
+        <li>Organized 4 phone-banking drives during the 2020 election cycle, mobilizing the AAPI community across key districts</li>
+        <li>Hosted webinars featuring trailblazers including Sadaf Jaffer (first Muslim-American woman mayor in the U.S.) and local leaders including Council Member Zo Qadri</li>
+        <li>Presented Teen PACT's mission to elected officials including State Representatives Salman Bhojani and Vikki Lalani, and former State Senator Wendy Davis</li>
+        <li>Raised $10K+ including $1.5K for Pakistan flood relief and $7.2K via bake sale for refugee support</li>
+        <li>Led "Build a Backpack" for two years with Muslim Community Support Services — assembling 100+ school-supply kits annually for refugee children</li>
+      </ul>
+      <div class="role-stats">
+        <div><div class="role-stat-num">$10K+</div><div class="role-stat-label">Raised for relief causes</div></div>
+        <div><div class="role-stat-num">100+</div><div class="role-stat-label">Backpacks assembled annually</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MSA -->
+<section class="cause-section">
+  <div class="sub-eyebrow">UT Austin MSA</div>
+  <h2 class="sub-heading reveal">WHAT I'VE<br>CONTRIBUTED.</h2>
+  <p class="sub-subhead">Finance committee, event logistics, and community organizing at UT.</p>
+  <div class="role-block reveal">
+    <div class="role-card">
+      <div class="role-org">UT Austin Muslim Students Association</div>
+      <div class="role-title">FINANCE SUBCOMMITTEE</div>
+      <div class="role-dates">Aug 2025 – Present</div>
+      <div class="role-tags"><span class="tag">Fundraising</span><span class="tag">Funding Proposals</span><span class="tag">Event Logistics</span></div>
+      <ul class="role-bullets">
+        <li>Presented funding pitches to 5 mosques requesting $2,000 each, securing support for an organization serving 250+ members</li>
+        <li>Developed detailed funding proposals totaling $10,000 in potential annual contributions for long-term organizational needs</li>
+        <li>Helped plan and execute MSA Assassins — managing live point tracking and gameplay logistics for 15 teams and 40+ participants</li>
+        <li>Monitored game metrics including eliminations, challenge completion, and team standings throughout the competition</li>
+        <li>Served as primary point of contact for participant questions, conflict resolution, and rule clarifications</li>
+        <li>Collaborated on challenge design and supported participant engagement through timely social media updates</li>
+      </ul>
+    </div>
+  </div>
+  <div class="role-block reveal" style="margin-top:2px;">
+    <div class="role-card">
+      <div class="role-org">UT Austin Muslim Students Association</div>
+      <div class="role-title">SHOWDOWN LOGISTICS COORDINATOR</div>
+      <div class="role-subtitle">Sisters' Division</div>
+      <div class="role-dates">Jan 2026 – Mar 2026</div>
+      <div class="role-tags"><span class="tag">Event Logistics</span><span class="tag">Travel Coordination</span><span class="tag">Operations</span></div>
+      <ul class="role-bullets">
+        <li>Directed end-to-end event logistics for 100+ student participants attending Showdown in Arlington</li>
+        <li>Coordinated hotel accommodations for 30+ members — hotel selection, room assignments, and payment collection</li>
+        <li>Evaluated 40+ lodging options to secure the best fit for group size, budget, and location needs</li>
+        <li>Expanded volunteer driver participation from 2 to 9 drivers, significantly increasing transportation capacity</li>
+        <li>Built transportation plans around staggered departure times and competition schedules for efficient travel</li>
+        <li>Managed jersey ordering from design approval through payment collection and on-site distribution for 100+ students</li>
+        <li>Served as primary day-of logistics contact — answering questions, troubleshooting issues, and ensuring smooth execution</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="back-nav">
+  <a class="back-link" href="index.html">Back to Home</a>
+  <div style="display:flex;gap:32px;">
+    <a class="back-link" style="flex-direction:row-reverse" href="code.html">Code →</a>
+    <a class="back-link" style="flex-direction:row-reverse" href="craft.html">Craft →</a>
+  </div>
+</div>
+<footer><span>© 2026 Myreen Malik</span><span>Cause</span></footer>
+<script>
+const cur = document.getElementById('cur');
+document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
+document.querySelectorAll('a').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.style.fontSize = '28px'; });
+  el.addEventListener('mouseleave', () => { cur.style.fontSize = '20px'; });
+});
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 80); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

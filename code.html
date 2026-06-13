@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code — Myreen Malik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Epilogue:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #F7F4EF; --black: #0A0A0A; --accent: #5E8066;
+  --gray: #888880; --border: #DEDAD2;
+  --display: 'Bebas Neue', sans-serif; --serif: 'Cormorant Garamond', serif; --body: 'Epilogue', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--black); font-family: var(--body); font-weight: 300; overflow-x: hidden; cursor: none; }
+.cursor { position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); font-size: 20px; transition: font-size .15s; user-select: none; color: var(--accent); mix-blend-mode: multiply; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; background: var(--bg); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: var(--display); font-size: 22px; letter-spacing: 3px; color: var(--black); text-decoration: none; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--black); }
+.page-hero { padding: 160px 48px 80px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; }
+.page-title { font-family: var(--display); font-size: clamp(100px, 18vw, 240px); line-height: 0.82; color: var(--accent); }
+.page-meta { text-align: right; max-width: 280px; }
+.page-meta-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-bottom: 12px; }
+.page-meta-desc { font-size: 13px; line-height: 1.75; color: var(--gray); }
+.subsection { padding: 80px 48px; }
+.subsection + .subsection { border-top: 1px solid var(--border); }
+.sub-eyebrow { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); display: flex; align-items: center; gap: 16px; margin-bottom: 48px; }
+.sub-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.sub-heading { font-family: var(--display); font-size: clamp(48px, 7vw, 88px); line-height: 0.88; margin-bottom: 56px; }
+.project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); }
+.project-card { background: var(--bg); padding: 52px; border-left: 3px solid transparent; transition: background .3s, border-color .3s; }
+.project-card:hover { background: #F0F4F1; border-left-color: var(--accent); }
+.project-card:hover .project-title { color: var(--accent); }
+.project-card:hover .project-link::after { transform: translateX(6px); }
+.project-featured { grid-column: span 2; }
+.win-badge { display: inline-block; background: var(--accent); color: white; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; margin-bottom: 20px; }
+.project-num { font-family: var(--serif); font-style: italic; font-size: 12px; color: var(--gray); margin-bottom: 12px; }
+.project-title { font-family: var(--display); font-size: clamp(28px, 3.5vw, 48px); line-height: 0.95; margin-bottom: 6px; transition: color .25s; }
+.project-subtitle { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--gray); margin-bottom: 8px; }
+.project-date { font-size: 10px; letter-spacing: 1.5px; color: var(--gray); margin-bottom: 16px; }
+.project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.tag { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); border: 1px solid var(--border); padding: 5px 10px; }
+.project-desc { font-size: 13px; line-height: 1.75; color: var(--gray); margin-bottom: 28px; max-width: 520px; }
+.project-bullets { list-style: none; margin-bottom: 28px; }
+.project-bullets li { font-size: 12px; line-height: 1.7; color: var(--gray); padding: 5px 0 5px 20px; position: relative; }
+.project-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+.project-link { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--black); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: color .25s; }
+.project-link::after { content: '→'; transition: transform .2s; }
+.exp-list { display: flex; flex-direction: column; }
+.exp-row { display: grid; grid-template-columns: 220px 1fr auto; gap: 32px; align-items: start; padding: 32px 0; border-bottom: 1px solid var(--border); }
+.exp-date { font-size: 11px; color: var(--gray); letter-spacing: 1px; padding-top: 4px; }
+.exp-org { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+.exp-role { font-family: var(--display); font-size: 22px; color: var(--accent); letter-spacing: 1px; }
+.exp-active { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); padding-top: 4px; }
+.back-nav { padding: 32px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.back-link { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color .2s; display: inline-flex; align-items: center; gap: 10px; }
+.back-link::before { content: '←'; transition: transform .2s; }
+.back-link:hover { color: var(--black); }
+.back-link:hover::before { transform: translateX(-4px); }
+footer { padding: 24px 48px; display: flex; justify-content: space-between; border-top: 1px solid var(--border); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+<div class="cursor" id="cur">✦</div>
+<nav>
+  <a class="nav-logo" href="index.html">MM</a>
+  <ul class="nav-links">
+    <li><a href="code.html" class="active">Code</a></li>
+    <li><a href="craft.html">Craft</a></li>
+    <li><a href="cause.html">Cause</a></li>
+  </ul>
+</nav>
+<div class="page-hero">
+  <div class="page-title">CODE</div>
+  <div class="page-meta">
+    <div class="page-meta-label">What I Build</div>
+    <p class="page-meta-desc">From AI-powered nonprofit tools to statistical research — data and technology in service of something real.</p>
+  </div>
+</div>
+
+<section class="subsection">
+  <div class="sub-eyebrow">Tech Projects</div>
+  <h2 class="sub-heading reveal">WHAT I'VE<br>BUILT.</h2>
+  <div class="project-grid">
+    <div class="project-card project-featured reveal">
+      <span class="win-badge">🏆 1st Place — Hack.MSA 2026 · 26 teams · 180 participants</span>
+      <div class="project-num">01 / Featured</div>
+      <div class="project-title">TAYSIR</div>
+      <div class="project-subtitle">AI-Powered Fundraising Dashboard for Islamic Relief USA</div>
+      <div class="project-tags"><span class="tag">React + Vite</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span><span class="tag">OpenAI</span><span class="tag">Nonprofit Tech</span></div>
+      <p class="project-desc">AI-powered operations dashboard built for Islamic Relief USA, replacing fragmented spreadsheet workflows. Features an AI CSV importer that auto-maps messy real-world data, a donor intelligence engine generating personalized outreach referencing each donor's full giving history, and proactive smart alerts for operational gaps.</p>
+      <a class="project-link" href="https://devpost.com" target="_blank">View on Devpost</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">02</div>
+      <div class="project-title">TERAVISTA CHATBOT</div>
+      <div class="project-subtitle">Bilingual AI Chatbot for Dental Practice</div>
+      <div class="project-tags"><span class="tag">Next.js 14</span><span class="tag">Claude AI</span><span class="tag">Prisma/SQLite</span><span class="tag">Bilingual EN/ES</span></div>
+      <p class="project-desc">Production-ready AI chatbot for Teravista Dentistry. HIPAA-aware consent flow, bilingual interface, in-chat appointment booking with real-time validation and automated email via Resend API.</p>
+      <a class="project-link" href="https://github.com/myreenmalik/terra_vista_chatbot" target="_blank">View on GitHub</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">03</div>
+      <div class="project-title">DATA SCIENCE GAME</div>
+      <div class="project-subtitle">Educational Game for Girls Who Code</div>
+      <div class="project-tags"><span class="tag">p5.js</span><span class="tag">JavaScript</span><span class="tag">Girls Who Code</span></div>
+      <p class="project-desc">Educational game teaching data science fundamentals through interactive gameplay. State-based system with dynamic transitions, custom event-driven programming, and real-world dataset integration.</p>
+      <a class="project-link" href="https://github.com/myreenmalik" target="_blank">View on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section class="subsection">
+  <div class="sub-eyebrow">Data Projects</div>
+  <h2 class="sub-heading reveal">WHAT I'VE<br>ANALYZED.</h2>
+  <div class="project-grid">
+    <div class="project-card reveal">
+      <div class="project-num">01</div>
+      <div class="project-title">TRAVIS COUNTY HOUSING</div>
+      <div class="project-subtitle">Cost Burden & Affordability Across 260 Census Tracts</div>
+      <div class="project-tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">scikit-learn</span><span class="tag">Census Data</span></div>
+      <p class="project-desc">Analyzed affordability across 260 Travis County census tracts. Key finding: 12.7% cost-burdened county-wide, with East Austin Tract 6.08 at a 406% burden index — a stark map of housing inequity in Austin.</p>
+      <a class="project-link" href="https://github.com/myreenmalik" target="_blank">View on GitHub</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">02</div>
+      <div class="project-title">U.S. HOMELESSNESS TRENDS</div>
+      <div class="project-subtitle">17 Years of HUD Point-in-Time Data</div>
+      <div class="project-tags"><span class="tag">R</span><span class="tag">tidyverse</span><span class="tag">ggplot2</span><span class="tag">Statistical Modeling</span></div>
+      <p class="project-desc">Analyzed 10K+ observations across 17 years of HUD data. Applied t-tests, two-way ANOVA, and linear regression, with 20+ visualizations including custom U.S. choropleth maps tracking homelessness over time.</p>
+      <a class="project-link" href="https://github.com/myreenmalik" target="_blank">View on GitHub</a>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">03</div>
+      <div class="project-title">AUSTIN AIR QUALITY</div>
+      <div class="project-subtitle">Dynamic Traffic Management to Reduce Urban Pollution</div>
+      <div class="project-date">Nov 2023 – Feb 2024</div>
+      <div class="project-tags"><span class="tag">R</span><span class="tag">RStudio</span><span class="tag">Random Forest</span><span class="tag">Machine Learning</span></div>
+      <p class="project-desc">Built Austin's Dynamic Traffic Management System (DTMS) to address air quality by optimizing traffic patterns through real-time incentives and disincentives based on live air quality data. Applied Random Forest models to analyze and predict traffic patterns, combining statistical analysis, data cleaning, correlation analysis, and ML implementation to create an innovative solution for improving urban air quality.</p>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">04</div>
+      <div class="project-title">CRIMINAL JUSTICE AI BIAS</div>
+      <div class="project-subtitle">Reducing Racial Disparities in Recidivism Risk Models</div>
+      <div class="project-date">Jul 2022 – Aug 2022</div>
+      <div class="project-tags"><span class="tag">Python</span><span class="tag">Naive Bayes</span><span class="tag">Random Forest</span><span class="tag">Algorithmic Fairness</span></div>
+      <p class="project-desc">Analyzed Naive Bayes and RandomForestClassifier models predicting criminal recidivism, identifying racial bias with disproportionately higher false positive rates for Black defendants. Tested the impact of removing race as a feature, reducing false positive rate disparity by 33.3% in Naive Bayes and 10.6% in RandomForestClassifier. Presented findings on algorithmic fairness and its real-world applications in criminal justice systems.</p>
+    </div>
+  </div>
+</section>
+
+<section class="subsection">
+  <div class="sub-eyebrow">Research</div>
+  <h2 class="sub-heading reveal">WHAT I'VE<br>STUDIED.</h2>
+  <div class="project-grid">
+    <div class="project-card reveal">
+      <div class="project-num">01</div>
+      <div class="project-title">SOUTH ASIAN MENTAL HEALTH</div>
+      <div class="project-subtitle">Sociocultural Influences on Mental Health Literacy Among the Diaspora</div>
+      <div class="project-tags"><span class="tag">R</span><span class="tag">Survey Design</span><span class="tag">HLR Modeling</span><span class="tag">UT Austin</span></div>
+      <p class="project-desc">Research assistant at UT Austin's Mental Health Initiative for South Asians (MHISA). Studying sociocultural influences on mental health literacy among South Asian diaspora populations. Constructed theoretical framework diagrams and hierarchical linear regression models for academic poster presentation.</p>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">02</div>
+      <div class="project-title">AUDIENCE RESEARCH ANALYST</div>
+      <div class="project-subtitle">Data Department at The Daily Texan</div>
+      <div class="project-tags"><span class="tag">Survey Design</span><span class="tag">Data Analysis</span><span class="tag">Methodology</span><span class="tag">Journalism</span></div>
+      <p class="project-desc">Developing and administering surveys for a 400+ member student newsroom at UT Austin, with reach extending across a 55,000-student university and its faculty, staff, and alumni to inform editorial and audience strategy. Also designing a comprehensive internal survey methodology guide covering question design, bias reduction, scale selection, and data analysis best practices to standardize research workflows for current and future Daily Texan staff.</p>
+    </div>
+  </div>
+</section>
+
+<section class="subsection">
+  <div class="sub-eyebrow">Experience</div>
+  <h2 class="sub-heading reveal">WHERE I'VE<br>WORKED.</h2>
+  <div class="exp-list">
+    <div class="exp-row reveal"><div class="exp-date">Feb 2026 — Present</div><div><div class="exp-org">Muslim Professional Society</div><div class="exp-role">FULL STACK DEVELOPER</div></div><div class="exp-active">Active</div></div>
+    <div class="exp-row reveal"><div class="exp-date">Jan 2026 — Present</div><div><div class="exp-org">The Daily Texan</div><div class="exp-role">AUDIENCE RESEARCH ANALYST</div></div><div class="exp-active">Active</div></div>
+    <div class="exp-row reveal"><div class="exp-date">Aug 2025 — Dec 2025</div><div><div class="exp-org">Convergent · UT Austin</div><div class="exp-role">FRONTEND DEVELOPER</div></div><div></div></div>
+    <div class="exp-row reveal"><div class="exp-date">Aug 2025 — Dec 2025</div><div><div class="exp-org">Texas Luminescence</div><div class="exp-role">BACKEND ENGINEER</div></div><div></div></div>
+    <div class="exp-row reveal"><div class="exp-date">Jun 2024 — Aug 2024</div><div><div class="exp-org">Austin Public Library · City of Austin</div><div class="exp-role">DATA & TECH INTERN</div></div><div></div></div>
+    <div class="exp-row reveal"><div class="exp-date">Jun 2023 — Jul 2023</div><div><div class="exp-org">Austin Resource Recovery · City of Austin</div><div class="exp-role">HR DATA INTERN</div></div><div></div></div>
+  </div>
+</section>
+
+<div class="back-nav">
+  <a class="back-link" href="index.html">Back to Home</a>
+  <div style="display:flex;gap:32px;">
+    <a class="back-link" style="flex-direction:row-reverse" href="craft.html">Craft →</a>
+    <a class="back-link" style="flex-direction:row-reverse" href="cause.html">Cause →</a>
+  </div>
+</div>
+<footer><span>© 2026 Myreen Malik</span><span>Code</span></footer>
+<script>
+const cur = document.getElementById('cur');
+document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
+document.querySelectorAll('a, .project-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.style.fontSize = '28px'; });
+  el.addEventListener('mouseleave', () => { cur.style.fontSize = '20px'; });
+});
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 80); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

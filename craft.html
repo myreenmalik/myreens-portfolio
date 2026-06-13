@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Craft — Myreen Malik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Epilogue:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #F7F4EF; --black: #0A0A0A; --accent: #B86B82;
+  --green: #5E8066; --gray: #888880; --border: #DEDAD2;
+  --display: 'Bebas Neue', sans-serif; --serif: 'Cormorant Garamond', serif; --body: 'Epilogue', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--black); font-family: var(--body); font-weight: 300; overflow-x: hidden; cursor: none; }
+.cursor { position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); font-size: 20px; transition: font-size .15s; user-select: none; color: var(--accent); mix-blend-mode: multiply; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; background: var(--bg); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: var(--display); font-size: 22px; letter-spacing: 3px; color: var(--black); text-decoration: none; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--black); }
+.page-hero { padding: 160px 48px 80px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; }
+.page-title { font-family: var(--display); font-size: clamp(100px, 18vw, 240px); line-height: 0.82; color: var(--accent); }
+.page-meta { text-align: right; max-width: 280px; }
+.page-meta-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-bottom: 12px; }
+.page-meta-desc { font-size: 13px; line-height: 1.75; color: var(--gray); }
+.gallery-section { padding: 80px 48px; }
+.gallery-section + .gallery-section { border-top: 1px solid var(--border); }
+.sub-eyebrow { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); display: flex; align-items: center; gap: 16px; margin-bottom: 48px; }
+.sub-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.sub-heading { font-family: var(--display); font-size: clamp(48px, 7vw, 88px); line-height: 0.88; margin-bottom: 16px; }
+.sub-subhead { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--gray); margin-bottom: 56px; }
+
+/* GRAPHIC GRID */
+.graphic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); margin-bottom: 2px; }
+.graphic-grid.two-col { grid-template-columns: 1fr 1fr; }
+.graphic-item { background: var(--bg); position: relative; overflow: hidden; aspect-ratio: 3/4; display: flex; flex-direction: column; justify-content: flex-end; }
+.graphic-item.wide { grid-column: span 2; aspect-ratio: 16/9; }
+.img-placeholder { position: absolute; inset: 0; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); }
+.graphic-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.graphic-item:hover img { transform: scale(1.03); }
+.graphic-caption { position: relative; z-index: 2; background: linear-gradient(transparent, rgba(10,10,10,0.72)); padding: 24px 20px 16px; color: white; }
+.graphic-caption-title { font-family: var(--display); font-size: 18px; letter-spacing: 1px; }
+.graphic-caption-sub { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+/* CAROUSEL */
+.carousel-wrap { position: relative; overflow: hidden; }
+.carousel-track { display: flex; gap: 2px; transition: transform .4s ease; }
+.carousel-slide { flex: 0 0 calc(33.333% - 2px); background: var(--border); aspect-ratio: 1; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.carousel-slide .img-placeholder { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); }
+.carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+.carousel-slide .slide-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(10,10,10,0.6); padding: 12px 16px; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: white; }
+.carousel-controls { display: flex; gap: 16px; margin-top: 24px; align-items: center; }
+.carousel-btn { background: none; border: 1px solid var(--border); color: var(--black); font-size: 18px; padding: 10px 20px; cursor: none; transition: background .2s, color .2s; font-family: var(--body); }
+.carousel-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+.carousel-dots { display: flex; gap: 8px; align-items: center; margin-left: 16px; }
+.carousel-dot { width: 6px; height: 6px; background: var(--border); border-radius: 50%; transition: background .2s; }
+.carousel-dot.active { background: var(--accent); }
+
+/* PHOTO GRID for photography */
+.photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); }
+.photo-grid.four-col { grid-template-columns: repeat(4, 1fr); }
+.photo-item { background: var(--border); position: relative; overflow: hidden; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
+.photo-item.tall { aspect-ratio: 2/3; }
+.photo-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.photo-item:hover img { transform: scale(1.04); }
+.photo-item .img-placeholder { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); }
+
+.upload-hint { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); text-align: center; padding: 12px; border: 1px dashed var(--border); margin-top: 16px; }
+.back-nav { padding: 32px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.back-link { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color .2s; display: inline-flex; align-items: center; gap: 10px; }
+.back-link::before { content: '←'; transition: transform .2s; }
+.back-link:hover { color: var(--black); }
+.back-link:hover::before { transform: translateX(-4px); }
+footer { padding: 24px 48px; display: flex; justify-content: space-between; border-top: 1px solid var(--border); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+<div class="cursor" id="cur">✦</div>
+<nav>
+  <a class="nav-logo" href="index.html">MM</a>
+  <ul class="nav-links">
+    <li><a href="code.html">Code</a></li>
+    <li><a href="craft.html" class="active">Craft</a></li>
+    <li><a href="cause.html">Cause</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-title">CRAFT</div>
+  <div class="page-meta">
+    <div class="page-meta-label">What I Make</div>
+    <p class="page-meta-desc">Graphic design, sewing, scrapbooking, and photography — creativity that carries meaning beyond the screen.</p>
+  </div>
+</div>
+
+<!-- GRAPHIC DESIGN -->
+<section class="gallery-section">
+  <div class="sub-eyebrow">Graphic Design</div>
+  <h2 class="sub-heading reveal">DIGITAL<br>WORK.</h2>
+  <p class="sub-subhead">Canva graphics for humanitarian fundraising campaigns and community events.</p>
+  <div class="graphic-grid reveal">
+    <div class="graphic-item"><div class="img-placeholder">Add image</div><div class="graphic-caption"><div class="graphic-caption-title">PICNIC FOR PALESTINE</div><div class="graphic-caption-sub">Fundraiser flyer · Teen PACT</div></div></div>
+    <div class="graphic-item"><div class="img-placeholder">Add image</div><div class="graphic-caption"><div class="graphic-caption-title">RAISE FOR AFGHANISTAN</div><div class="graphic-caption-sub">MIST 2022 Humanitarian Team</div></div></div>
+    <div class="graphic-item"><div class="img-placeholder">Add image</div><div class="graphic-caption"><div class="graphic-caption-title">BUILD A BACKPACK</div><div class="graphic-caption-sub">School supplies drive · Refugees & DV survivors</div></div></div>
+    <div class="graphic-item"><div class="img-placeholder">Add image</div><div class="graphic-caption"><div class="graphic-caption-title">HUMANITARIAN MOVIE NIGHT</div><div class="graphic-caption-sub">Syria fundraiser · APA Humanitarian Team</div></div></div>
+    <div class="graphic-item"><div class="img-placeholder">Add image</div><div class="graphic-caption"><div class="graphic-caption-title">MSA ASSASSINS</div><div class="graphic-caption-sub">Challenge card design · UT Austin MSA</div></div></div>
+    <div class="graphic-item"><div class="img-placeholder">Add image</div><div class="graphic-caption"><div class="graphic-caption-title">RAMADAN IFTAR</div><div class="graphic-caption-sub">Event invitation · APA Student Council</div></div></div>
+  </div>
+  <div class="graphic-grid two-col reveal">
+    <div class="graphic-item wide"><div class="img-placeholder">Add image — Syria fundraiser Facebook post</div><div class="graphic-caption"><div class="graphic-caption-title">SYRIAN AID CAMPAIGN</div><div class="graphic-caption-sub">Facebook post · APA Humanitarian Team</div></div></div>
+    <div class="graphic-item wide"><div class="img-placeholder">Add image — MSA pitch deck</div><div class="graphic-caption"><div class="graphic-caption-title">MSA PITCH DECK</div><div class="graphic-caption-sub">16-slide presentation · UT Austin MSA</div></div></div>
+  </div>
+  <p class="upload-hint">→ Replace placeholder divs with &lt;img src="filename.jpg"&gt; when you add your images</p>
+</section>
+
+<!-- SEWING & SCRAPBOOKING -->
+<section class="gallery-section">
+  <div class="sub-eyebrow">Hands-On Work</div>
+  <h2 class="sub-heading reveal">MADE BY<br>HAND.</h2>
+  <p class="sub-subhead">Sewing upcycled bags, scrapbooking, and fashion design.</p>
+  <div class="carousel-wrap reveal">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide"><div class="img-placeholder">Sewing project</div><div class="slide-label">Sewing · Upcycled bag</div></div>
+      <div class="carousel-slide"><div class="img-placeholder">Sewing project</div><div class="slide-label">Sewing · Upcycled bag</div></div>
+      <div class="carousel-slide"><div class="img-placeholder">Scrapbook page</div><div class="slide-label">Scrapbooking</div></div>
+      <div class="carousel-slide"><div class="img-placeholder">Scrapbook page</div><div class="slide-label">Scrapbooking</div></div>
+      <div class="carousel-slide"><div class="img-placeholder">Fashion design</div><div class="slide-label">Fashion Design · 10th grade</div></div>
+      <div class="carousel-slide"><div class="img-placeholder">Fashion design</div><div class="slide-label">Fashion Design · 10th grade</div></div>
+    </div>
+  </div>
+  <div class="carousel-controls">
+    <button class="carousel-btn" id="prevBtn">←</button>
+    <button class="carousel-btn" id="nextBtn">→</button>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+  <p class="upload-hint" style="margin-top:24px;">→ Replace placeholder divs with &lt;img&gt; tags when you add your photos</p>
+</section>
+
+<!-- PHOTOGRAPHY -->
+<section class="gallery-section">
+  <div class="sub-eyebrow">Photography</div>
+  <h2 class="sub-heading reveal">THROUGH<br>THE LENS.</h2>
+  <p class="sub-subhead">AP Art photography — composition, light, and the world as I see it.</p>
+  <div class="photo-grid reveal">
+    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
+    <div class="photo-item tall"><div class="img-placeholder">Photo</div></div>
+    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
+    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
+    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
+    <div class="photo-item tall"><div class="img-placeholder">Photo</div></div>
+    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
+    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
+    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
+  </div>
+  <p class="upload-hint">→ Replace placeholder divs with &lt;img&gt; tags when you add your AP Art photos</p>
+</section>
+
+<div class="back-nav">
+  <a class="back-link" href="index.html">Back to Home</a>
+  <div style="display:flex;gap:32px;">
+    <a class="back-link" style="flex-direction:row-reverse" href="code.html">Code →</a>
+    <a class="back-link" style="flex-direction:row-reverse" href="cause.html">Cause →</a>
+  </div>
+</div>
+<footer><span>© 2026 Myreen Malik</span><span>Craft</span></footer>
+
+<script>
+const cur = document.getElementById('cur');
+document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
+document.querySelectorAll('a, .carousel-btn').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.style.fontSize = '28px'; });
+  el.addEventListener('mouseleave', () => { cur.style.fontSize = '20px'; });
+});
+const track = document.getElementById('carouselTrack');
+const slides = track.querySelectorAll('.carousel-slide');
+const dotsContainer = document.getElementById('carouselDots');
+const perView = 3;
+const total = slides.length;
+let current = 0;
+for (let i = 0; i < Math.ceil(total / perView); i++) {
+  const dot = document.createElement('div');
+  dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+  dotsContainer.appendChild(dot);
+}
+function goTo(idx) {
+  current = Math.max(0, Math.min(idx, total - perView));
+  const slideWidth = slides[0].offsetWidth + 2;
+  track.style.transform = `translateX(-${current * slideWidth}px)`;
+  document.querySelectorAll('.carousel-dot').forEach((d, i) => { d.classList.toggle('active', i === Math.floor(current / perView)); });
+}
+document.getElementById('nextBtn').addEventListener('click', () => goTo(current + perView));
+document.getElementById('prevBtn').addEventListener('click', () => goTo(current - perView));
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 80); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

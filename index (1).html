@@ -3,674 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Myreen Malik — Statistics, Data Science & Builder</title>
+<title>Myreen Malik</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Epilogue:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --bg: #F7F4EF;
-  --black: #0A0A0A;
-  --accent: #B86B82;
-  --green: #5E8066;
-  --gray: #888880;
-  --border: #DEDAD2;
-  --display: 'Bebas Neue', sans-serif;
-  --serif: 'Cormorant Garamond', serif;
-  --body: 'Epilogue', sans-serif;
+  --bg: #F7F4EF; --black: #0A0A0A; --accent: #B86B82;
+  --green: #5E8066; --dark-green: #3D5C45; --gray: #888880; --border: #DEDAD2;
+  --display: 'Bebas Neue', sans-serif; --serif: 'Cormorant Garamond', serif; --body: 'Epilogue', sans-serif;
 }
-
 html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--black);
-  font-family: var(--body);
-  font-weight: 300;
-  overflow-x: hidden;
-  cursor: none;
-}
-
-.cursor {
-  position: fixed;
-  pointer-events: none; z-index: 9999;
-  transform: translate(-50%, -50%);
-  font-size: 20px; line-height: 1;
-  transition: font-size .15s, opacity .15s;
-  user-select: none;
-  color: var(--accent);
-  mix-blend-mode: multiply;
-}
-
-.cursor-ring { display: none; }
-
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 24px 48px;
-}
-
-.nav-logo {
-  font-family: var(--display);
-  font-size: 22px; letter-spacing: 3px;
-  color: var(--black); text-decoration: none;
-}
-
-.nav-links { display: flex; gap: 36px; list-style: none; }
-
-.nav-links a {
-  font-size: 10px; letter-spacing: 2.5px;
-  text-transform: uppercase; color: var(--black);
-  text-decoration: none; transition: color .2s;
-}
-.nav-links a:hover { color: var(--accent); }
-
-/* HERO */
-.hero {
-  min-height: 100vh; display: flex; flex-direction: column;
-  justify-content: flex-end; padding: 40px 48px 64px;
-  position: relative; overflow: hidden;
-}
-
-.hero-name {
-  font-family: var(--display);
-  font-size: clamp(96px, 17vw, 260px);
-  line-height: 0.84; letter-spacing: -1px;
-  user-select: none;
-}
-
+body { background: var(--bg); color: var(--black); font-family: var(--body); font-weight: 300; overflow-x: hidden; cursor: none; }
+.cursor { position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); font-size: 20px; line-height: 1; transition: font-size .15s; user-select: none; color: var(--accent); mix-blend-mode: multiply; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 24px 48px; }
+.nav-logo { font-family: var(--display); font-size: 22px; letter-spacing: 3px; color: var(--black); text-decoration: none; }
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px 48px 64px; position: relative; overflow: hidden; }
+.hero-name { font-family: var(--display); font-size: clamp(96px, 17vw, 260px); line-height: 0.84; letter-spacing: -1px; user-select: none; }
 .hero-name .line2 { color: var(--accent); }
+.hero-pill { position: absolute; top: 50%; left: 50%; transform: translate(-40%, -60%); background: var(--green); color: white; padding: 14px 28px; font-family: var(--serif); font-style: italic; font-size: 17px; white-space: nowrap; z-index: 10; pointer-events: none; }
+.hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+.hero-intro { max-width: 320px; font-size: 12px; line-height: 1.8; color: var(--gray); text-align: right; }
+.ticker { background: var(--green); color: white; padding: 14px 0; overflow: hidden; white-space: nowrap; }
+.ticker-track { display: inline-flex; animation: slide 22s linear infinite; }
+.ticker-item { font-family: var(--display); font-size: 14px; letter-spacing: 3px; padding: 0 36px; }
+.ticker-item.hl { color: #f7c5d0; }
+@keyframes slide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-.hero-pill {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-40%, -60%);
-  background: var(--green); color: white;
-  padding: 14px 28px;
-  font-family: var(--serif); font-style: italic; font-size: 17px;
-  white-space: nowrap; z-index: 10;
-  pointer-events: none;
-}
+.split-section { padding: 100px 48px 80px; }
+.split-eyebrow { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); display: flex; align-items: center; gap: 16px; margin-bottom: 56px; }
+.split-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.split-heading { font-family: var(--display); font-size: clamp(48px, 7vw, 100px); line-height: 0.9; margin-bottom: 80px; }
+.split-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; background: var(--border); }
+.split-card { background: var(--bg); padding: 64px 48px; text-decoration: none; color: var(--black); display: flex; flex-direction: column; justify-content: space-between; min-height: 420px; transition: background .3s; border-bottom: 4px solid transparent; }
+.split-card.code:hover { border-bottom-color: var(--green); background: #F0F4F1; }
+.split-card.craft:hover { border-bottom-color: var(--accent); background: #FDF0F4; }
+.split-card.cause:hover { border-bottom-color: var(--dark-green); background: #EFF3F0; }
+.card-num { font-family: var(--serif); font-style: italic; font-size: 11px; color: var(--gray); letter-spacing: 1px; margin-bottom: 40px; }
+.card-label { font-family: var(--display); font-size: clamp(72px, 8vw, 110px); line-height: 0.85; }
+.split-card.code .card-label { color: var(--green); }
+.split-card.craft .card-label { color: var(--accent); }
+.split-card.cause .card-label { color: var(--dark-green); }
+.card-bottom { margin-top: 48px; }
+.card-desc { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); line-height: 1.8; margin-bottom: 28px; }
+.card-arrow { font-size: 24px; color: var(--black); transition: transform .25s; display: inline-block; }
+.split-card:hover .card-arrow { transform: translateX(8px); }
 
-.hero-bottom {
-  display: flex; justify-content: space-between; align-items: flex-end;
-  margin-top: 48px; padding-top: 24px;
-  border-top: 1px solid var(--border);
-}
+.bio-strip { background: #EEE9E0; padding: 80px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.bio-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-bottom: 24px; }
+.bio-text { font-size: 15px; line-height: 1.85; color: #444; font-weight: 300; }
+.bio-text strong { color: var(--black); font-weight: 500; }
+.bio-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.bio-stat-num { font-family: var(--display); font-size: 52px; line-height: 1; color: var(--accent); }
+.bio-stat-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-top: 6px; }
 
-.hero-stats { display: flex; gap: 48px; }
+.awards-strip { padding: 64px 48px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.awards-eyebrow { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); display: flex; align-items: center; gap: 16px; margin-bottom: 48px; }
+.awards-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.awards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); }
+.award-item { background: var(--bg); padding: 32px; }
+.award-year { font-family: var(--display); font-size: 42px; color: var(--accent); line-height: 1; }
+.award-name { font-family: var(--display); font-size: 18px; margin: 8px 0 6px; letter-spacing: 0.5px; }
+.award-context { font-size: 11px; color: var(--gray); line-height: 1.6; }
 
-.stat-num {
-  display: block;
-  font-family: var(--display); font-size: 36px; color: var(--accent);
-  line-height: 1;
-}
-.stat-label {
-  display: block; font-size: 9px; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--gray); margin-top: 4px;
-}
-
-.hero-intro {
-  max-width: 260px; font-size: 12px; line-height: 1.7;
-  color: var(--gray); text-align: right;
-}
-
-/* TICKER */
-.ticker {
-  background: var(--green); color: white;
-  padding: 14px 0; overflow: hidden; white-space: nowrap;
-}
-.ticker-track {
-  display: inline-flex;
-  animation: slide 22s linear infinite;
-}
-.ticker-item {
-  font-family: var(--display); font-size: 14px;
-  letter-spacing: 3px; padding: 0 36px;
-}
-.ticker-item.hl { color: var(--accent); }
-@keyframes slide {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* SECTIONS */
-section { padding: 100px 48px; }
-
-.section-eyebrow {
-  font-size: 9px; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--gray);
-  display: flex; align-items: center; gap: 16px;
-  margin-bottom: 56px;
-}
-.section-eyebrow::after {
-  content: ''; flex: 1; height: 1px; background: var(--border);
-}
-
-/* PROJECTS */
-.projects-heading {
-  font-family: var(--display);
-  font-size: clamp(64px, 10vw, 140px);
-  line-height: 0.88; margin-bottom: 80px;
-}
-
-.project-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px; background: var(--border);
-}
-
-.project-card {
-  background: var(--bg); padding: 52px;
-  transition: background .3s, border-color .3s;
-  position: relative;
-  border-left: 3px solid transparent;
-}
-.project-card:hover { background: #FDF0F4; border-left-color: var(--accent); }
-.project-card:hover .project-title { color: var(--accent); }
-.project-card:hover .project-link { color: var(--green); }
-.project-card:hover .project-link::after { transform: translateX(6px); }
-
-.project-featured { grid-column: span 2; }
-
-.win-badge {
-  display: inline-block;
-  background: var(--accent); color: white;
-  font-size: 9px; letter-spacing: 2px;
-  text-transform: uppercase; padding: 6px 14px;
-  margin-bottom: 20px; font-family: var(--body);
-}
-
-.project-num {
-  font-family: var(--serif); font-style: italic;
-  font-size: 12px; color: var(--gray);
-  margin-bottom: 20px; transition: color .25s;
-}
-
-.project-title {
-  font-family: var(--display);
-  font-size: clamp(36px, 4vw, 56px);
-  line-height: 0.95; margin-bottom: 20px;
-  transition: color .25s;
-}
-
-.project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-
-.tag {
-  font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--gray); border: 1px solid var(--border);
-  padding: 5px 10px; transition: color .25s, border-color .25s;
-}
-
-.project-desc {
-  font-size: 13px; line-height: 1.75;
-  color: var(--gray); margin-bottom: 36px;
-  max-width: 520px; transition: color .25s;
-}
-
-.project-link {
-  font-size: 10px; letter-spacing: 2.5px;
-  text-transform: uppercase; color: var(--black);
-  text-decoration: none; display: inline-flex;
-  align-items: center; gap: 10px; transition: color .25s;
-}
-.project-link::after {
-  content: '→'; transition: transform .2s;
-}
-
-/* ABOUT */
-.about { background: #253029; color: var(--bg); }
-
-.about-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 80px; align-items: start;
-}
-
-.about-heading {
-  font-family: var(--display);
-  font-size: clamp(80px, 11vw, 160px);
-  line-height: 0.85; color: var(--bg);
-}
-.about-sub {
-  font-family: var(--serif); font-style: italic;
-  font-size: 28px; color: var(--accent);
-  display: block; margin-top: 8px;
-}
-
-.about-text {
-  padding-top: 8px;
-}
-.about-text p {
-  font-size: 15px; line-height: 1.85;
-  color: #999; margin-bottom: 28px;
-}
-.about-text p strong { color: var(--bg); font-weight: 500; }
-
-.skills {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 0; margin-top: 40px;
-}
-.skill {
-  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
-  color: #666; padding: 13px 0;
-  border-bottom: 1px solid #3a4a3d;
-  display: flex; align-items: center; gap: 10px;
-}
-.skill::before { content: '—'; color: var(--accent); }
-
-/* EXPERIENCE */
-.experience-section { background: #253029; color: var(--bg); }
-.exp-heading {
-  font-family: var(--display);
-  font-size: clamp(60px, 9vw, 130px);
-  color: var(--bg);
-  line-height: 0.88; margin-bottom: 72px;
-}
-
-.exp-list { border-top: 1px solid rgba(255,255,255,.15); }
-
-.exp-row {
-  display: grid; grid-template-columns: 200px 1fr 120px;
-  gap: 40px; align-items: start;
-  padding: 30px 0; border-bottom: 1px solid rgba(255,255,255,.15);
-  transition: all .2s;
-}
-.exp-row:hover .exp-role { color: var(--accent); }
-
-.exp-date {
-  font-family: var(--serif); font-style: italic;
-  font-size: 13px; color: rgba(255,255,255,.45); padding-top: 6px;
-}
-.exp-org {
-  font-size: 9px; letter-spacing: 2px;
-  text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 8px;
-}
-.exp-role {
-  font-family: var(--display); font-size: 30px;
-  color: var(--bg);
-  line-height: 1; transition: color .2s;
-}
-.exp-research-badge {
-  display: inline-block; margin-top: 6px;
-  font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
-  background: #EDF4EE; color: var(--green);
-  border: 1px solid var(--green);
-  padding: 3px 10px;
-}
-.exp-active {
-  font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--accent); border: 1px solid var(--accent);
-  padding: 6px 12px; text-align: center;
-  justify-self: end; align-self: start; margin-top: 6px;
-  white-space: nowrap;
-}
-
-/* AWARDS */
-.awards { background: var(--green); color: white; }
-
-.awards-heading {
-  font-family: var(--display);
-  font-size: clamp(60px, 9vw, 130px);
-  line-height: 0.88; margin-bottom: 64px;
-}
-
-.awards-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;
-}
-
-.award {
-  border-top: 1px solid rgba(255,255,255,.3);
-  padding-top: 24px;
-}
-.award-year {
-  font-family: var(--serif); font-style: italic;
-  font-size: 13px; opacity: .65; margin-bottom: 12px;
-}
-.award-name {
-  font-family: var(--display); font-size: 22px;
-  line-height: 1.1; margin-bottom: 8px;
-}
-.award-context { font-size: 11px; letter-spacing: .5px; opacity: .65; }
-
-/* CONTACT */
-.contact { text-align: center; padding: 120px 48px; }
-
-.contact-pre {
-  font-family: var(--serif); font-style: italic;
-  font-size: 18px; color: var(--gray); margin-bottom: 16px;
-}
-
-.contact-heading {
-  font-family: var(--display);
-  font-size: clamp(80px, 14vw, 200px);
-  line-height: 0.84; color: var(--black); margin-bottom: 64px;
-}
+.contact { padding: 100px 48px; text-align: center; }
+.contact-pre { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--gray); margin-bottom: 16px; }
+.contact-heading { font-family: var(--display); font-size: clamp(64px, 12vw, 160px); line-height: 0.88; margin-bottom: 56px; }
 .contact-heading span { color: var(--accent); }
-
-.contact-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-
-.cta-link {
-  font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--black); text-decoration: none;
-  border: 1px solid var(--black); padding: 14px 28px;
-  display: inline-flex; align-items: center; gap: 10px;
-  transition: background .2s, color .2s;
-}
-.cta-link:hover { background: #253029; color: var(--bg); }
-
-/* FOOTER */
-footer {
-  background: #253029; color: #7a9a7e;
-  padding: 24px 48px;
-  display: flex; justify-content: space-between;
-  font-size: 10px; letter-spacing: 1px;
-}
-
-/* ANIMATIONS */
-.reveal {
-  opacity: 0; transform: translateY(32px);
-  transition: opacity .7s ease, transform .7s ease;
-}
-.reveal.in { opacity: 1; transform: translateY(0); }
-
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  nav { padding: 20px 24px; }
-  section { padding: 72px 24px; }
-  .hero { padding: 24px 24px 48px; }
-  .project-grid { grid-template-columns: 1fr; }
-  .project-featured { grid-column: span 1; }
-  .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  .exp-row { grid-template-columns: 1fr; gap: 4px; }
-  .exp-active { justify-self: start; }
-  .awards-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .hero-stats { gap: 24px; flex-wrap: wrap; }
-}
-
-@media (max-width: 560px) {
-  .hero-pill { display: none; }
-  .awards-grid { grid-template-columns: 1fr; }
-  .nav-links { gap: 20px; }
-}
+.contact-links { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+.cta-link { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 4px; transition: color .2s, border-color .2s; }
+.cta-link:hover { color: var(--accent); border-color: var(--accent); }
+footer { padding: 24px 48px; display: flex; justify-content: space-between; border-top: 1px solid var(--border); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
 </style>
 </head>
 <body>
-
-<div class="cursor" id="cur">♥</div>
-<div class="cursor-ring" id="ring"></div>
-
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#">MM</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#honors">Honors</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
+<div class="cursor" id="cur">✦</div>
+<nav><a class="nav-logo" href="index.html">MM</a></nav>
 <section class="hero">
-  <div class="hero-name reveal">
-    MYREEN<br>
-    <span class="line2">MALIK.</span>
-  </div>
-  <div class="hero-pill">Statistics &amp; Data Science · Builder · Researcher</div>
-  <div class="hero-bottom reveal">
-    <div class="hero-stats">
-      <div>
-        <span class="stat-num">1ST</span>
-        <span class="stat-label">Hackathon Win</span>
-      </div>
-      <div>
-        <span class="stat-num">2</span>
-        <span class="stat-label">Production AI Apps</span>
-      </div>
-      <div>
-        <span class="stat-num">$70K+</span>
-        <span class="stat-label">Funds Raised</span>
-      </div>
-      <div>
-        <span class="stat-num">'29</span>
-        <span class="stat-label">UT Austin</span>
-      </div>
-    </div>
-    <p class="hero-intro">
-      Freshman at UT Austin shipping AI products, conducting research, and building things that matter.
-    </p>
+  <div class="hero-pill">statistics & data science</div>
+  <div class="hero-name"><div>MYREEN</div><div class="line2">MALIK</div></div>
+  <div class="hero-bottom">
+    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);">UT Austin · Class of 2028</div>
+    <p class="hero-intro">I build things that matter — with data, with design, and with community. Here's everything I've made.</p>
   </div>
 </section>
-
-<!-- TICKER -->
-<div class="ticker" aria-hidden="true">
+<div class="ticker">
   <div class="ticker-track">
-    <span class="ticker-item">FULL STACK DEV</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">MACHINE LEARNING</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">DATA ANALYSIS</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">RESEARCH</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">SOCIAL IMPACT</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">NEXT.JS</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">R · PYTHON</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">AI INTEGRATION</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">FULL STACK DEV</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">MACHINE LEARNING</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">DATA ANALYSIS</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">RESEARCH</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">SOCIAL IMPACT</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">NEXT.JS</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">R · PYTHON</span><span class="ticker-item hl">✦</span>
-    <span class="ticker-item">AI INTEGRATION</span><span class="ticker-item hl">✦</span>
+    <span class="ticker-item">CODE</span><span class="ticker-item hl">✦</span>
+    <span class="ticker-item">CRAFT</span><span class="ticker-item hl">✦</span>
+    <span class="ticker-item">CAUSE</span><span class="ticker-item hl">✦</span>
+    <span class="ticker-item">CODE</span><span class="ticker-item hl">✦</span>
+    <span class="ticker-item">CRAFT</span><span class="ticker-item hl">✦</span>
+    <span class="ticker-item">CAUSE</span><span class="ticker-item hl">✦</span>
+    <span class="ticker-item">CODE</span><span class="ticker-item hl">✦</span>
+    <span class="ticker-item">CRAFT</span><span class="ticker-item hl">✦</span>
+    <span class="ticker-item">CAUSE</span><span class="ticker-item hl">✦</span>
   </div>
 </div>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="section-eyebrow" style="color:#444">About</div>
-  <div class="about-grid">
-    <div class="reveal">
-      <div class="about-heading">
-        AB<br>OUT.
-        <span class="about-sub">Who I am</span>
-      </div>
-    </div>
-    <div class="about-text reveal">
-      <p>
-        I'm <strong>Myreen Malik</strong>, a freshman at UT Austin studying Statistics &amp; Data Science — with a minor in Social Work and certificates in Nonprofits &amp; Social Entrepreneurship and Programming &amp; Computing.
-      </p>
-      <p>
-        I build things that matter. From <strong>production AI apps with real users</strong> to <strong>community-driven research</strong>, I sit at the intersection of data, technology, and human impact. That's where I do my best work.
-      </p>
-      <p>
-        Currently: Full Stack Developer at MPS, Research Analyst at The Daily Texan, and Research Assistant at UT's Mental Health Initiative for South Asians.
-      </p>
-      <div class="skills">
-        <div class="skill">Python</div>
-        <div class="skill">R</div>
-        <div class="skill">React / Next.js</div>
-        <div class="skill">Node.js</div>
-        <div class="skill">SQL / PostgreSQL</div>
-        <div class="skill">Machine Learning</div>
-        <div class="skill">Tailwind CSS</div>
-        <div class="skill">Statistical Modeling</div>
-      </div>
-    </div>
+<section class="split-section">
+  <div class="split-eyebrow">Everything I Do</div>
+  <div class="split-cards">
+    <a class="split-card code reveal" href="code.html">
+      <div><div class="card-num">01 of 03</div><div class="card-label">CODE</div></div>
+      <div class="card-bottom"><p class="card-desc">Tech projects · Data science · AI apps · Research</p><span class="card-arrow">→</span></div>
+    </a>
+    <a class="split-card craft reveal" href="craft.html">
+      <div><div class="card-num">02 of 03</div><div class="card-label">CRAFT</div></div>
+      <div class="card-bottom"><p class="card-desc">Graphic design · Sewing · Scrapbooking · Photography</p><span class="card-arrow">→</span></div>
+    </a>
+    <a class="split-card cause reveal" href="cause.html">
+      <div><div class="card-num">03 of 03</div><div class="card-label">CAUSE</div></div>
+      <div class="card-bottom"><p class="card-desc">Humanitarian work · Event planning · Student leadership</p><span class="card-arrow">→</span></div>
+    </a>
   </div>
 </section>
-
-<!-- PROJECTS -->
-<section id="work">
-  <div class="section-eyebrow">Selected Work</div>
-  <h2 class="projects-heading reveal">WHAT<br>I'VE<br>BUILT.</h2>
-  <div class="project-grid">
-
-    <div class="project-card project-featured reveal">
-      <span class="win-badge">🏆 1st Place — Hack.MSA 2026 · 26 teams · 180 participants</span>
-      <div class="project-num">01 / Featured Project</div>
-      <div class="project-title">TAYSIR</div>
-      <div class="project-tags">
-        <span class="tag">React + Vite</span>
-        <span class="tag">Node.js</span>
-        <span class="tag">PostgreSQL</span>
-        <span class="tag">OpenAI</span>
-        <span class="tag">Nonprofit Tech</span>
-      </div>
-      <p class="project-desc">
-        AI-powered operations dashboard built for Islamic Relief USA, replacing fragmented spreadsheet workflows. Features an AI CSV importer that auto-maps messy real-world data, a donor intelligence engine generating personalized outreach referencing each donor's full giving history, and proactive smart alerts for operational gaps — all delivered under hackathon constraints.
-      </p>
-      <a class="project-link" href="https://devpost.com" target="_blank">View on Devpost</a>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-num">02</div>
-      <div class="project-title">TERAVISTA CHATBOT</div>
-      <div class="project-tags">
-        <span class="tag">Next.js 14</span>
-        <span class="tag">Claude AI</span>
-        <span class="tag">Prisma/SQLite</span>
-        <span class="tag">Bilingual EN/ES</span>
-      </div>
-      <p class="project-desc">
-        Production-ready AI chatbot for Teravista Dentistry. HIPAA-aware consent flow, bilingual interface, in-chat appointment booking with real-time validation and automated email via Resend API.
-      </p>
-      <a class="project-link" href="https://github.com/myreenmalik/terra_vista_chatbot" target="_blank">View on GitHub</a>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-num">03</div>
-      <div class="project-title">HOMELESSNESS ANALYSIS</div>
-      <div class="project-tags">
-        <span class="tag">R</span>
-        <span class="tag">tidyverse</span>
-        <span class="tag">ggplot2</span>
-        <span class="tag">Statistical Modeling</span>
-      </div>
-      <p class="project-desc">
-        Analyzed 10K+ observations across 17 years of HUD Point-in-Time data. Applied t-tests, two-way ANOVA, and linear regression, with 20+ visualizations including custom U.S. choropleth maps.
-      </p>
-      <a class="project-link" href="https://github.com/myreenmalik" target="_blank">View on GitHub</a>
-    </div>
-
-    <div class="project-card reveal">
-      <div class="project-num">04</div>
-      <div class="project-title">DATA SCIENCE GAME</div>
-      <div class="project-tags">
-        <span class="tag">p5.js</span>
-        <span class="tag">JavaScript</span>
-        <span class="tag">p5.play</span>
-        <span class="tag">Girls Who Code</span>
-      </div>
-      <p class="project-desc">
-        Educational game teaching data science fundamentals through interactive gameplay. State-based system with dynamic transitions, custom event-driven programming, and real-world dataset integration.
-      </p>
-      <a class="project-link" href="https://github.com/myreenmalik" target="_blank">View on GitHub</a>
-    </div>
-
+<div class="bio-strip">
+  <div>
+    <div class="bio-label">About Me</div>
+    <p class="bio-text">I'm a <strong>Statistics & Data Science</strong> student at UT Austin with a minor in CS and a certificate in Nonprofits & Social Entrepreneurship. I sit at the intersection of data, design, and community — using whatever skills I have to build things that actually matter.</p>
+    <br>
+    <p class="bio-text">Long-term, I want to work in <strong>international relief</strong> using data to understand inequities and support the Muslim community. Until then, I'm building, designing, and organizing everywhere I can.</p>
   </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience" class="experience-section">
-  <div class="section-eyebrow" style="color:rgba(255,255,255,.4)">Experience</div>
-  <h2 class="exp-heading reveal">WHERE<br>I'VE<br>WORKED.</h2>
-  <div class="exp-list">
-    <div class="exp-row reveal">
-      <div class="exp-date">Feb 2026 — Present</div>
-      <div>
-        <div class="exp-org">Muslim Professional Society</div>
-        <div class="exp-role">FULL STACK DEVELOPER</div>
-      </div>
-      <div class="exp-active">Active</div>
-    </div>
-    <div class="exp-row reveal">
-      <div class="exp-date">Jan 2026 — Present</div>
-      <div>
-        <div class="exp-org">The Daily Texan</div>
-        <div class="exp-role">AUDIENCE RESEARCH ANALYST</div>
-        <div class="exp-research-badge">Research</div>
-      </div>
-      <div class="exp-active">Active</div>
-    </div>
-    <div class="exp-row reveal">
-      <div class="exp-date">Aug 2025 — Present</div>
-      <div>
-        <div class="exp-org">Mental Health Initiative for South Asians · UT Austin</div>
-        <div class="exp-role">RESEARCH ASSISTANT</div>
-        <div class="exp-research-badge">Research</div>
-      </div>
-      <div class="exp-active">Active</div>
-    </div>
-    <div class="exp-row reveal">
-      <div class="exp-date">Aug 2025 — Dec 2025</div>
-      <div>
-        <div class="exp-org">Convergent · UT Austin</div>
-        <div class="exp-role">FRONTEND DEVELOPER</div>
-      </div>
-      <div></div>
-    </div>
-    <div class="exp-row reveal">
-      <div class="exp-date">Aug 2025 — Dec 2025</div>
-      <div>
-        <div class="exp-org">Texas Luminescence</div>
-        <div class="exp-role">BACKEND ENGINEER</div>
-      </div>
-      <div></div>
-    </div>
-    <div class="exp-row reveal">
-      <div class="exp-date">Jun 2024 — Aug 2024</div>
-      <div>
-        <div class="exp-org">Austin Public Library · City of Austin</div>
-        <div class="exp-role">DATA &amp; TECH INTERN</div>
-      </div>
-      <div></div>
-    </div>
+  <div class="bio-stats">
+    <div><div class="bio-stat-num">$70K+</div><div class="bio-stat-label">Raised across humanitarian & community causes</div></div>
+    <div><div class="bio-stat-num">35+</div><div class="bio-stat-label">Events planned & hosted</div></div>
+    <div><div class="bio-stat-num">60+</div><div class="bio-stat-label">Volunteers coordinated</div></div>
+    <div><div class="bio-stat-num">$10K+</div><div class="bio-stat-label">StuCo funds raised</div></div>
   </div>
-</section>
-
-<!-- AWARDS -->
-<section class="awards" id="honors">
-  <div class="section-eyebrow" style="color:rgba(255,255,255,.4)">Recognition</div>
-  <h2 class="awards-heading reveal">HONORS<br>&amp; AWARDS.</h2>
+</div>
+<div class="awards-strip">
+  <div class="awards-eyebrow">Recognition</div>
   <div class="awards-grid">
-    <div class="award reveal">
-      <div class="award-year">2026</div>
-      <div class="award-name">1ST PLACE — HACK.MSA</div>
-      <div class="award-context">Giving Back Track · 1st of 26 teams · 180 total participants</div>
-    </div>
-    <div class="award reveal">
-      <div class="award-year">2026</div>
-      <div class="award-name">LSC STATEWIDE MSA SCHOLARSHIP</div>
-      <div class="award-context">One of five $500 scholarships across Texas MSAs</div>
-    </div>
-    <div class="award reveal">
-      <div class="award-year">2025</div>
-      <div class="award-name">TOP 50 FINALIST — JYEM</div>
-      <div class="award-context">Top ~3% of 1,372 competitors nationwide</div>
-    </div>
-    <div class="award reveal">
-      <div class="award-year">2025</div>
-      <div class="award-name">LEGACY OF APA AWARD</div>
-      <div class="award-context">First-ever $1,500 scholarship recipient in school history</div>
-    </div>
-    <div class="award reveal">
-      <div class="award-year">2023</div>
-      <div class="award-name">NATIONAL MERIT COMMENDED</div>
-      <div class="award-context">Top ~3% nationwide on PSAT/NMSQT</div>
-    </div>
-    <div class="award reveal">
-      <div class="award-year">2023</div>
-      <div class="award-name">3RD OVERALL — MIST NATIONALS</div>
-      <div class="award-context">Duke University · 6,000+ competitors across USA &amp; Canada</div>
-    </div>
+    <div class="award-item reveal"><div class="award-year">2026</div><div class="award-name">1ST PLACE — HACK.MSA</div><div class="award-context">Giving Back Track · 1st of 26 teams · 180 participants</div></div>
+    <div class="award-item reveal"><div class="award-year">2026</div><div class="award-name">LSC STATEWIDE MSA SCHOLARSHIP</div><div class="award-context">One of five $500 scholarships across Texas MSAs</div></div>
+    <div class="award-item reveal"><div class="award-year">2025</div><div class="award-name">TOP 50 FINALIST — JYEM</div><div class="award-context">Top ~3% of 1,372 competitors nationwide</div></div>
+    <div class="award-item reveal"><div class="award-year">2025</div><div class="award-name">LEGACY OF APA AWARD</div><div class="award-context">First-ever $1,500 scholarship recipient · 27-year school history</div></div>
+    <div class="award-item reveal"><div class="award-year">2023</div><div class="award-name">NATIONAL MERIT COMMENDED</div><div class="award-context">Top ~3% nationwide on PSAT/NMSQT</div></div>
+    <div class="award-item reveal"><div class="award-year">2023</div><div class="award-name">3RD OVERALL — MIST NATIONALS</div><div class="award-context">Duke University · 6,000+ competitors across USA & Canada</div></div>
   </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
+</div>
+<section class="contact">
   <p class="contact-pre">Got a project? Let's talk.</p>
   <h2 class="contact-heading reveal">LET'S<br><span>BUILD.</span></h2>
   <div class="contact-links">
@@ -679,36 +154,17 @@ footer {
     <a class="cta-link" href="https://github.com/myreenmalik" target="_blank">GitHub</a>
   </div>
 </section>
-
-<!-- FOOTER -->
-<footer>
-  <span>© 2026 Myreen Malik</span>
-  <span>Built with intention.</span>
-</footer>
-
+<footer><span>© 2026 Myreen Malik</span><span>Built with intention.</span></footer>
 <script>
 const cur = document.getElementById('cur');
-let mx = 0, my = 0;
-
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
-});
-
-document.querySelectorAll('a, .project-card').forEach(el => {
+document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
+document.querySelectorAll('a, .split-card').forEach(el => {
   el.addEventListener('mouseenter', () => { cur.style.fontSize = '28px'; });
   el.addEventListener('mouseleave', () => { cur.style.fontSize = '20px'; });
 });
-
 const obs = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('in'), i * 80);
-      obs.unobserve(e.target);
-    }
-  });
+  entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 80); obs.unobserve(e.target); } });
 }, { threshold: 0.08 });
-
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
