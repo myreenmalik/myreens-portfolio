@@ -27,23 +27,19 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .page-meta { text-align: right; max-width: 280px; }
 .page-meta-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-bottom: 12px; }
 .page-meta-desc { font-size: 13px; line-height: 1.75; color: var(--gray); }
-
-/* IMPACT STRIP — warm parchment so it doesn't look scary */
 .impact-strip { background: #E8E2D8; padding: 64px 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; border-bottom: 3px solid var(--accent); }
 .impact-num { font-family: var(--display); font-size: 64px; color: var(--accent); line-height: 1; }
 .impact-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-top: 8px; line-height: 1.6; }
-
 .cause-section { padding: 80px 48px; }
 .cause-section + .cause-section { border-top: 1px solid var(--border); }
 .sub-eyebrow { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); display: flex; align-items: center; gap: 16px; margin-bottom: 48px; }
 .sub-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 .sub-heading { font-family: var(--display); font-size: clamp(48px, 7vw, 88px); line-height: 0.88; margin-bottom: 16px; }
 .sub-subhead { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--gray); margin-bottom: 56px; }
-
-.role-block { display: grid; grid-template-columns: 1fr; gap: 2px; margin-bottom: 2px; }
-.role-block.has-image { grid-template-columns: 1fr 340px; }
-.role-card { border: 1px solid var(--border); padding: 52px; border-left: 4px solid transparent; transition: border-color .3s, background .3s; }
-.role-card:hover { border-left-color: var(--accent); background: #EFF3F0; }
+.role-block { display: grid; grid-template-columns: 1fr; margin-bottom: 2px; border: 1px solid var(--border); border-left: 4px solid transparent; transition: border-color .3s, background .3s; }
+.role-block:hover { border-left-color: var(--accent); background: #EFF3F0; }
+.role-block.has-image { grid-template-columns: 1fr 340px; align-items: center; }
+.role-card { padding: 52px; border: none; }
 .role-org { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
 .role-title { font-family: var(--display); font-size: clamp(26px, 3vw, 42px); line-height: 0.95; margin-bottom: 6px; }
 .role-subtitle { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--gray); margin-bottom: 6px; }
@@ -56,14 +52,20 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .role-stats { display: flex; gap: 32px; margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--border); flex-wrap: wrap; }
 .role-stat-num { font-family: var(--display); font-size: 36px; color: var(--accent); line-height: 1; }
 .role-stat-label { font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); margin-top: 4px; }
-
-.role-photo-panel { background: var(--border); display: flex; flex-direction: column; gap: 2px; }
-.role-photo { flex: 1; position: relative; overflow: hidden; min-height: 140px; display: flex; align-items: center; justify-content: center; }
-.role-photo .img-placeholder { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); }
+.role-photo-panel { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; gap: 12px; border-left: 1px solid var(--border); }
+.role-carousel { position: relative; overflow: hidden; width: 100%; aspect-ratio: 1; background: var(--border); }
+.role-carousel-track { display: flex; height: 100%; transition: transform .4s ease; }
+.role-photo { flex: 0 0 100%; position: relative; height: 100%; }
+.role-photo .img-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); }
 .role-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .role-photo-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(10,10,10,0.55); padding: 10px 14px; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: white; }
-
-.upload-hint { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); text-align: center; padding: 12px; border: 1px dashed var(--border); margin-top: 16px; }
+.role-carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(10,10,10,0.5); color: white; border: none; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: none; z-index: 10; transition: background .2s; }
+.role-carousel-btn:hover { background: var(--accent); }
+.role-carousel-btn.prev { left: 8px; }
+.role-carousel-btn.next { right: 8px; }
+.role-carousel-dots { display: flex; gap: 6px; justify-content: center; }
+.role-carousel-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--border); border: 1px solid var(--gray); transition: background .2s; cursor: none; }
+.role-carousel-dot.active { background: var(--accent); border-color: var(--accent); }
 .back-nav { padding: 32px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
 .back-link { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color .2s; display: inline-flex; align-items: center; gap: 10px; }
 .back-link::before { content: '←'; transition: transform .2s; }
@@ -125,19 +127,31 @@ footer { padding: 24px 48px; display: flex; justify-content: space-between; bord
       </div>
     </div>
     <div class="role-photo-panel">
-      <div class="role-photo"><div class="img-placeholder">Add photo</div><div class="role-photo-label">Add caption</div></div>
-      <div class="role-photo"><div class="img-placeholder">Add photo</div><div class="role-photo-label">Add caption</div></div>
-      <div class="role-photo"><div class="img-placeholder">Add photo</div><div class="role-photo-label">Add caption</div></div>
+      <div class="role-carousel" id="carousel-humanitarian">
+        <div class="role-carousel-track">
+          <div class="role-photo"><img src="humanitarian/IMG_7955.jpg" alt=""><div class="role-photo-label">Community Movie Night</div></div>
+          <div class="role-photo"><img src="humanitarian/bake sale.jpg" alt=""><div class="role-photo-label">Bake Sale for Afghanistan</div></div>
+          <div class="role-photo"><img src="humanitarian/IMG_3939.jpg" alt=""><div class="role-photo-label">Sports Tournament</div></div>
+          <div class="role-photo"><img src="humanitarian/basket.png" alt=""><div class="role-photo-label">Syria Gift Basket Sale</div></div>
+        </div>
+        <button class="role-carousel-btn prev" onclick="carouselPrev('carousel-humanitarian')">‹</button>
+        <button class="role-carousel-btn next" onclick="carouselNext('carousel-humanitarian')">›</button>
+      </div>
+      <div class="role-carousel-dots" id="dots-humanitarian">
+        <div class="role-carousel-dot active"></div>
+        <div class="role-carousel-dot"></div>
+        <div class="role-carousel-dot"></div>
+        <div class="role-carousel-dot"></div>
+      </div>
     </div>
   </div>
-  <p class="upload-hint">→ Replace placeholder divs with &lt;img&gt; tags when you add real photos</p>
 </section>
 
 <!-- STUDENT COUNCIL -->
 <section class="cause-section">
   <div class="sub-eyebrow">Student Leadership</div>
   <h2 class="sub-heading reveal">WHAT I'VE<br>LED.</h2>
-  <p class="sub-subhead">From a dormant student council to the most impactful in 27 years of school history.</p>
+  <p class="sub-subhead">Student Council President · Austin Peace Academy · 2024–2025</p>
   <div class="role-block has-image reveal">
     <div class="role-card">
       <div class="role-org">APA Islamic School</div>
@@ -161,12 +175,30 @@ footer { padding: 24px 48px; display: flex; justify-content: space-between; bord
       </div>
     </div>
     <div class="role-photo-panel">
-      <div class="role-photo"><div class="img-placeholder">Add photo</div><div class="role-photo-label">Poetry Slam</div></div>
-      <div class="role-photo"><div class="img-placeholder">Add photo</div><div class="role-photo-label">Ramadan Iftar</div></div>
-      <div class="role-photo"><div class="img-placeholder">Add photo</div><div class="role-photo-label">Bonfire Night</div></div>
+      <div class="role-carousel" id="carousel-stuco">
+        <div class="role-carousel-track">
+          <div class="role-photo"><img src="stuco/stringlights.jpg" alt=""><div class="role-photo-label">Poetry Slam</div></div>
+          <div class="role-photo"><img src="stuco/ramadan.jpg" alt=""><div class="role-photo-label">Ramadan Iftar</div></div>
+          <div class="role-photo"><img src="stuco/parking spot.jpg" alt=""><div class="role-photo-label">Parking Spot Painting</div></div>
+          <div class="role-photo"><img src="stuco/boys BasketBall dunk.jpg" alt=""><div class="role-photo-label">Basketball Pep Rally</div></div>
+          <div class="role-photo"><img src="stuco/PHOTO-2025-03-24-08-10-25.jpg" alt=""><div class="role-photo-label">Ramadan Iftar</div></div>
+          <div class="role-photo"><img src="stuco/_DSC5073 (1).jpg" alt=""><div class="role-photo-label">Soccer Pep Rally</div></div>
+          <div class="role-photo"><img src="stuco/IMG_8680.jpg" alt=""><div class="role-photo-label">Volleyball Pep Rally</div></div>
+        </div>
+        <button class="role-carousel-btn prev" onclick="carouselPrev('carousel-stuco')">‹</button>
+        <button class="role-carousel-btn next" onclick="carouselNext('carousel-stuco')">›</button>
+      </div>
+      <div class="role-carousel-dots" id="dots-stuco">
+        <div class="role-carousel-dot active"></div>
+        <div class="role-carousel-dot"></div>
+        <div class="role-carousel-dot"></div>
+        <div class="role-carousel-dot"></div>
+        <div class="role-carousel-dot"></div>
+        <div class="role-carousel-dot"></div>
+        <div class="role-carousel-dot"></div>
+      </div>
     </div>
   </div>
-  <p class="upload-hint">→ Replace placeholder divs with &lt;img&gt; tags when you add real photos</p>
 </section>
 
 <!-- TEEN PACT -->
@@ -174,7 +206,7 @@ footer { padding: 24px 48px; display: flex; justify-content: space-between; bord
   <div class="sub-eyebrow">Teen PACT</div>
   <h2 class="sub-heading reveal">WHAT I'VE<br>ORGANIZED.</h2>
   <p class="sub-subhead">Civic engagement, voter outreach, and community fundraising.</p>
-  <div class="role-block reveal">
+  <div class="role-block has-image reveal">
     <div class="role-card">
       <div class="role-org">Teen PACT · Pakistani American Collaborative of Texas</div>
       <div class="role-title">FOUNDER & PRESIDENT</div>
@@ -191,6 +223,24 @@ footer { padding: 24px 48px; display: flex; justify-content: space-between; bord
       <div class="role-stats">
         <div><div class="role-stat-num">$10K+</div><div class="role-stat-label">Raised for relief causes</div></div>
         <div><div class="role-stat-num">100+</div><div class="role-stat-label">Backpacks assembled annually</div></div>
+      </div>
+    </div>
+    <div class="role-photo-panel">
+      <div class="role-carousel" id="carousel-teenpact">
+        <div class="role-carousel-track">
+          <div class="role-photo"><img src="teen/IMG_2623.jpeg" alt=""><div class="role-photo-label">Build A Backpack Fundraiser</div></div>
+          <div class="role-photo"><img src="teen/IMG_7490.jpeg" alt=""><div class="role-photo-label">Pakistan Flood Relief Fundraiser</div></div>
+          <div class="role-photo"><img src="teen/IMG_7491.jpeg" alt=""><div class="role-photo-label">Pakistan Flood Relief Fundraiser</div></div>
+          <div class="role-photo"><img src="teen/IMG_9770.png" alt=""><div class="role-photo-label">Palestine Fundraiser</div></div>
+        </div>
+        <button class="role-carousel-btn prev" onclick="carouselPrev('carousel-teenpact')">‹</button>
+        <button class="role-carousel-btn next" onclick="carouselNext('carousel-teenpact')">›</button>
+      </div>
+      <div class="role-carousel-dots" id="dots-teenpact">
+        <div class="role-carousel-dot active"></div>
+        <div class="role-carousel-dot"></div>
+        <div class="role-carousel-dot"></div>
+        <div class="role-carousel-dot"></div>
       </div>
     </div>
   </div>
@@ -245,8 +295,29 @@ footer { padding: 24px 48px; display: flex; justify-content: space-between; bord
   </div>
 </div>
 <footer><span>© 2026 Myreen Malik</span><span>Cause</span></footer>
+
 <script>
 const cur = document.getElementById('cur');
+const carouselState = {};
+
+function carouselInit(id) { carouselState[id] = 0; }
+
+function carouselGo(id, idx) {
+  const el = document.getElementById(id);
+  const slides = el.querySelectorAll('.role-photo');
+  const track = el.querySelector('.role-carousel-track');
+  const n = slides.length;
+  carouselState[id] = (idx + n) % n;
+  track.style.transform = `translateX(-${carouselState[id] * 100}%)`;
+  const dots = document.getElementById('dots-' + id.replace('carousel-', ''));
+  if (dots) dots.querySelectorAll('.role-carousel-dot').forEach((d, i) => d.classList.toggle('active', i === carouselState[id]));
+}
+
+function carouselNext(id) { carouselGo(id, (carouselState[id] || 0) + 1); }
+function carouselPrev(id) { carouselGo(id, (carouselState[id] || 0) - 1); }
+
+['carousel-humanitarian', 'carousel-stuco', 'carousel-teenpact'].forEach(id => carouselInit(id));
+
 document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
 document.querySelectorAll('a').forEach(el => {
   el.addEventListener('mouseenter', () => { cur.style.fontSize = '28px'; });

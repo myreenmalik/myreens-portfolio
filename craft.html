@@ -33,20 +33,15 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .sub-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 .sub-heading { font-family: var(--display); font-size: clamp(48px, 7vw, 88px); line-height: 0.88; margin-bottom: 16px; }
 .sub-subhead { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--gray); margin-bottom: 56px; }
-
-/* GRAPHIC GRID */
 .graphic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); margin-bottom: 2px; }
-.graphic-grid.two-col { grid-template-columns: 1fr 1fr; }
 .graphic-item { background: var(--bg); position: relative; overflow: hidden; aspect-ratio: 3/4; display: flex; flex-direction: column; justify-content: flex-end; }
-.graphic-item.wide { grid-column: span 2; aspect-ratio: 16/9; }
+.graphic-item:last-child:nth-child(3n+1) { grid-column: 2; }
 .img-placeholder { position: absolute; inset: 0; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); }
 .graphic-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
 .graphic-item:hover img { transform: scale(1.03); }
 .graphic-caption { position: relative; z-index: 2; background: linear-gradient(transparent, rgba(10,10,10,0.72)); padding: 24px 20px 16px; color: white; }
 .graphic-caption-title { font-family: var(--display); font-size: 18px; letter-spacing: 1px; }
 .graphic-caption-sub { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 4px; }
-
-/* CAROUSEL */
 .carousel-wrap { position: relative; overflow: hidden; }
 .carousel-track { display: flex; gap: 2px; transition: transform .4s ease; }
 .carousel-slide { flex: 0 0 calc(33.333% - 2px); background: var(--border); aspect-ratio: 1; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
@@ -54,22 +49,20 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
 .carousel-slide .slide-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(10,10,10,0.6); padding: 12px 16px; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: white; }
 .carousel-controls { display: flex; gap: 16px; margin-top: 24px; align-items: center; }
-.carousel-btn { background: none; border: 1px solid var(--border); color: var(--black); font-size: 18px; padding: 10px 20px; cursor: none; transition: background .2s, color .2s; font-family: var(--body); }
+.carousel-btn { background: none; border: 1px solid var(--border); color: var(--black); font-size: 18px; padding: 10px 20px; cursor: pointer; transition: background .2s, color .2s; font-family: var(--body); }
 .carousel-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
 .carousel-dots { display: flex; gap: 8px; align-items: center; margin-left: 16px; }
 .carousel-dot { width: 6px; height: 6px; background: var(--border); border-radius: 50%; transition: background .2s; }
 .carousel-dot.active { background: var(--accent); }
-
-/* PHOTO GRID for photography */
-.photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); }
-.photo-grid.four-col { grid-template-columns: repeat(4, 1fr); }
-.photo-item { background: var(--border); position: relative; overflow: hidden; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
-.photo-item.tall { aspect-ratio: 2/3; }
-.photo-item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
-.photo-item:hover img { transform: scale(1.04); }
-.photo-item .img-placeholder { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); }
-
-.upload-hint { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); text-align: center; padding: 12px; border: 1px dashed var(--border); margin-top: 16px; }
+.photo-subsection { margin-bottom: 64px; }
+.photo-subsection-heading { font-family: var(--display); font-size: clamp(32px, 4vw, 52px); line-height: 0.9; margin-bottom: 8px; color: var(--black); }
+.photo-subsection-sub { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--gray); margin-bottom: 28px; }
+.masonry { columns: 3; gap: 2px; }
+.masonry-item { break-inside: avoid; margin-bottom: 2px; }
+.masonry-item img { width: 100%; display: block; }
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 99999; align-items: center; justify-content: center; cursor: pointer; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
 .back-nav { padding: 32px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
 .back-link { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color .2s; display: inline-flex; align-items: center; gap: 10px; }
 .back-link::before { content: '←'; transition: transform .2s; }
@@ -82,6 +75,12 @@ footer { padding: 24px 48px; display: flex; justify-content: space-between; bord
 </head>
 <body>
 <div class="cursor" id="cur">✦</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" alt="">
+</div>
+
 <nav>
   <a class="nav-logo" href="index.html">MM</a>
   <ul class="nav-links">
@@ -103,20 +102,15 @@ footer { padding: 24px 48px; display: flex; justify-content: space-between; bord
 <section class="gallery-section">
   <div class="sub-eyebrow">Graphic Design</div>
   <h2 class="sub-heading reveal">DIGITAL<br>WORK.</h2>
-  <p class="sub-subhead">Canva graphics for humanitarian fundraising campaigns and community events.</p>
+  <p class="sub-subhead">Graphics for humanitarian fundraising campaigns and community events.</p>
   <div class="graphic-grid reveal">
-    <div class="graphic-item"><div class="img-placeholder">Add image</div><div class="graphic-caption"><div class="graphic-caption-title">PICNIC FOR PALESTINE</div><div class="graphic-caption-sub">Fundraiser flyer · Teen PACT</div></div></div>
-    <div class="graphic-item"><div class="img-placeholder">Add image</div><div class="graphic-caption"><div class="graphic-caption-title">RAISE FOR AFGHANISTAN</div><div class="graphic-caption-sub">MIST 2022 Humanitarian Team</div></div></div>
-    <div class="graphic-item"><div class="img-placeholder">Add image</div><div class="graphic-caption"><div class="graphic-caption-title">BUILD A BACKPACK</div><div class="graphic-caption-sub">School supplies drive · Refugees & DV survivors</div></div></div>
-    <div class="graphic-item"><div class="img-placeholder">Add image</div><div class="graphic-caption"><div class="graphic-caption-title">HUMANITARIAN MOVIE NIGHT</div><div class="graphic-caption-sub">Syria fundraiser · APA Humanitarian Team</div></div></div>
-    <div class="graphic-item"><div class="img-placeholder">Add image</div><div class="graphic-caption"><div class="graphic-caption-title">MSA ASSASSINS</div><div class="graphic-caption-sub">Challenge card design · UT Austin MSA</div></div></div>
-    <div class="graphic-item"><div class="img-placeholder">Add image</div><div class="graphic-caption"><div class="graphic-caption-title">RAMADAN IFTAR</div><div class="graphic-caption-sub">Event invitation · APA Student Council</div></div></div>
+    <div class="graphic-item"><img src="Picnic For Palestine Flyer Final Version.png" alt=""><div class="graphic-caption"><div class="graphic-caption-title">PICNIC FOR PALESTINE</div><div class="graphic-caption-sub">Fundraiser flyer · Teen PACT</div></div></div>
+    <div class="graphic-item"><img src="HElp Us Raise Money For Afghanistan!.png" alt=""><div class="graphic-caption"><div class="graphic-caption-title">FUNDRAISING FOR AFGHANISTAN</div><div class="graphic-caption-sub">MIST 2022 Humanitarian Team</div></div></div>
+    <div class="graphic-item"><img src="Beige and Yellow Backpack Illustrated Back To School Instagram Post.png" alt=""><div class="graphic-caption"><div class="graphic-caption-title">BUILD A BACKPACK</div><div class="graphic-caption-sub">School supplies drive · Refugees & DV survivors</div></div></div>
+    <div class="graphic-item"><img src="Support the APA student Humaintarian team in raising funds for Syrian aid!.png" alt=""><div class="graphic-caption"><div class="graphic-caption-title">SYRIAN AID CAMPAIGN</div><div class="graphic-caption-sub">Social Media post · APA Humanitarian Team</div></div></div>
+    <div class="graphic-item"><img src="msa assassins.png" alt=""><div class="graphic-caption"><div class="graphic-caption-title">MSA ASSASSINS</div><div class="graphic-caption-sub">Challenge card design · UT Austin MSA</div></div></div>
+    <div class="graphic-item"><img src="Green and Cream Illustrative Ramadan Iftar Invitation.png" alt=""><div class="graphic-caption"><div class="graphic-caption-title">RAMADAN IFTAR</div><div class="graphic-caption-sub">Event invitation · APA Student Council</div></div></div>
   </div>
-  <div class="graphic-grid two-col reveal">
-    <div class="graphic-item wide"><div class="img-placeholder">Add image — Syria fundraiser Facebook post</div><div class="graphic-caption"><div class="graphic-caption-title">SYRIAN AID CAMPAIGN</div><div class="graphic-caption-sub">Facebook post · APA Humanitarian Team</div></div></div>
-    <div class="graphic-item wide"><div class="img-placeholder">Add image — MSA pitch deck</div><div class="graphic-caption"><div class="graphic-caption-title">MSA PITCH DECK</div><div class="graphic-caption-sub">16-slide presentation · UT Austin MSA</div></div></div>
-  </div>
-  <p class="upload-hint">→ Replace placeholder divs with &lt;img src="filename.jpg"&gt; when you add your images</p>
 </section>
 
 <!-- SEWING & SCRAPBOOKING -->
@@ -139,26 +133,71 @@ footer { padding: 24px 48px; display: flex; justify-content: space-between; bord
     <button class="carousel-btn" id="nextBtn">→</button>
     <div class="carousel-dots" id="carouselDots"></div>
   </div>
-  <p class="upload-hint" style="margin-top:24px;">→ Replace placeholder divs with &lt;img&gt; tags when you add your photos</p>
 </section>
 
 <!-- PHOTOGRAPHY -->
 <section class="gallery-section">
   <div class="sub-eyebrow">Photography</div>
   <h2 class="sub-heading reveal">THROUGH<br>THE LENS.</h2>
-  <p class="sub-subhead">AP Art photography — composition, light, and the world as I see it.</p>
-  <div class="photo-grid reveal">
-    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
-    <div class="photo-item tall"><div class="img-placeholder">Photo</div></div>
-    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
-    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
-    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
-    <div class="photo-item tall"><div class="img-placeholder">Photo</div></div>
-    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
-    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
-    <div class="photo-item"><div class="img-placeholder">Photo</div></div>
+
+  <!-- AP ART -->
+  <div class="photo-subsection reveal">
+    <div class="photo-subsection-heading">AP ART</div>
+    <p class="photo-subsection-sub">2-D Art & Design · Sustained Investigation — urban life, joy and struggle in Austin</p>
+    <div style="display:grid;grid-template-columns:1fr 340px;gap:2px;background:var(--border);">
+      <div style="background:var(--bg);position:relative;overflow:hidden;height:500px;">
+        <div id="apTrack" style="display:flex;height:100%;transition:transform .4s ease;will-change:transform;">
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/myreenmalik3p.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/IMG_6956.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/IMG_6353.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/IMG_6719.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/IMG_6673.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/IMG_6284.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/IMG_6511.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/IMG_6491.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/myreenmalik10ss.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/IMG_6470.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/IMG_7173.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/IMG_6653.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/IMG_6868.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/IMG_7216.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="UPLOAD/IMG_7290.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+        </div>
+        <button onclick="slideAP(-1)" style="position:absolute;left:0;top:50%;transform:translateY(-50%);background:rgba(10,10,10,0.5);color:white;border:none;font-size:18px;padding:10px 14px;cursor:pointer;z-index:10;">‹</button>
+        <button onclick="slideAP(1)" style="position:absolute;right:0;top:50%;transform:translateY(-50%);background:rgba(10,10,10,0.5);color:white;border:none;font-size:18px;padding:10px 14px;cursor:pointer;z-index:10;">›</button>
+      </div>
+      <div style="background:var(--black);padding:48px 36px;display:flex;flex-direction:column;justify-content:center;">
+        <div id="apNum" style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Image 1 of 15</div>
+        <div id="apTitle" style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:white;line-height:1;margin-bottom:20px;">INCARCERATION</div>
+        <div id="apDesc" style="font-size:12px;line-height:1.8;color:rgba(255,255,255,0.65);">Represents incarceration in urban life. Used shadows and framing to create a confined mood.</div>
+        <div style="margin-top:16px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);">Canon EOS Rebel T2i</div>
+        <div id="apDots" style="margin-top:32px;display:flex;gap:8px;flex-wrap:wrap;"></div>
+        <div style="margin-top:24px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);">Click image to expand</div>
+      </div>
+    </div>
   </div>
-  <p class="upload-hint">→ Replace placeholder divs with &lt;img&gt; tags when you add your AP Art photos</p>
+
+  <!-- MISC -->
+  <div class="photo-subsection reveal">
+    <div class="photo-subsection-heading">MISC</div>
+    <p class="photo-subsection-sub">Personal photography — nature, architecture, and everyday moments</p>
+    <div class="masonry">
+      <div class="masonry-item"><img src="sus/IMG_0378.jpg" alt="" onclick="openLightbox(this.src)" style="cursor:pointer;"></div>
+      <div class="masonry-item"><img src="sus/IMG_0545.jpg" alt="" onclick="openLightbox(this.src)" style="cursor:pointer;"></div>
+      <div class="masonry-item"><img src="sus/IMG_0928 (1).jpg" alt="" onclick="openLightbox(this.src)" style="cursor:pointer;"></div>
+      <div class="masonry-item"><img src="sus/IMG_1153.jpg" alt="" onclick="openLightbox(this.src)" style="cursor:pointer;"></div>
+      <div class="masonry-item"><img src="sus/IMG_2109.jpg" alt="" onclick="openLightbox(this.src)" style="cursor:pointer;"></div>
+      <div class="masonry-item"><img src="sus/IMG_4487.jpg" alt="" onclick="openLightbox(this.src)" style="cursor:pointer;"></div>
+      <div class="masonry-item"><img src="sus/IMG_4749.jpg" alt="" onclick="openLightbox(this.src)" style="cursor:pointer;"></div>
+      <div class="masonry-item"><img src="sus/IMG_4891.jpg" alt="" onclick="openLightbox(this.src)" style="cursor:pointer;"></div>
+      <div class="masonry-item"><img src="sus/IMG_5285.jpg" alt="" onclick="openLightbox(this.src)" style="cursor:pointer;"></div>
+      <div class="masonry-item"><img src="sus/IMG_5990.jpg" alt="" onclick="openLightbox(this.src)" style="cursor:pointer;"></div>
+      <div class="masonry-item"><img src="sus/IMG_6008.jpg" alt="" onclick="openLightbox(this.src)" style="cursor:pointer;"></div>
+      <div class="masonry-item"><img src="sus/IMG_7327.jpg" alt="" onclick="openLightbox(this.src)" style="cursor:pointer;"></div>
+      <div class="masonry-item"><img src="sus/IMG_7443.jpg" alt="" onclick="openLightbox(this.src)" style="cursor:pointer;"></div>
+    </div>
+  </div>
+
 </section>
 
 <div class="back-nav">
@@ -177,6 +216,18 @@ document.querySelectorAll('a, .carousel-btn').forEach(el => {
   el.addEventListener('mouseenter', () => { cur.style.fontSize = '28px'; });
   el.addEventListener('mouseleave', () => { cur.style.fontSize = '20px'; });
 });
+
+// Lightbox
+function openLightbox(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// Sewing carousel
 const track = document.getElementById('carouselTrack');
 const slides = track.querySelectorAll('.carousel-slide');
 const dotsContainer = document.getElementById('carouselDots');
@@ -192,10 +243,54 @@ function goTo(idx) {
   current = Math.max(0, Math.min(idx, total - perView));
   const slideWidth = slides[0].offsetWidth + 2;
   track.style.transform = `translateX(-${current * slideWidth}px)`;
-  document.querySelectorAll('.carousel-dot').forEach((d, i) => { d.classList.toggle('active', i === Math.floor(current / perView)); });
+  document.querySelectorAll('#carouselDots .carousel-dot').forEach((d, i) => { d.classList.toggle('active', i === Math.floor(current / perView)); });
 }
 document.getElementById('nextBtn').addEventListener('click', () => goTo(current + perView));
 document.getElementById('prevBtn').addEventListener('click', () => goTo(current - perView));
+
+// AP Art carousel
+const apData = [
+  { title: "INCARCERATION", desc: "Represents incarceration in urban life. Used shadows and framing to create a confined mood." },
+  { title: "JOY IN URBAN LIFE", desc: "Explores joy in urban life. Photographed skateboarder using harsh shadows for visual contrast." },
+  { title: "HOPE IN DARKNESS", desc: "Represents hope in darkness. Used candlelight to highlight messages on a decaying wall." },
+  { title: "JOY & CULTURE", desc: "Shows joy and culture in urban life. Framed colorful graffiti against gray cityscape." },
+  { title: "UNITY", desc: "Represents unity in urban life. Focused on grouped locks with shared markings for visual impact." },
+  { title: "DRUG ISSUES", desc: "Highlights drug issues in urban life. Used shallow depth to isolate syringe and create focus." },
+  { title: "BEAUTY IN DECAY", desc: "Shows beauty in urban decay. Focused on chipped bricks with bold color to highlight contrast." },
+  { title: "URBAN DECLINE", desc: "Represents urban decay and decline. Framed graffiti and worn textures in a neglected alley." },
+  { title: "HOPE", desc: "Represents hope in urban life. Captured colorful message on worn metal to show light in decay." },
+  { title: "CLASS DIVIDE", desc: "Contrasts wealth and struggle. Framed alley with modern towers to show class divide in city life." },
+  { title: "PERSISTENCE", desc: "Represents persistence in urban youth. Captured motion to show repeated effort and balance." },
+  { title: "STREET CULTURE", desc: "Represents urban street culture. Used low angle to emphasize shared identity through stickers." },
+  { title: "MENTAL HEALTH", desc: "Addresses mental health struggles. Focused on knotted rope to symbolize inner turmoil." },
+  { title: "MOVING FORWARD", desc: "Represents personal growth in urban life. Captured skater mid-air to symbolize moving forward." },
+  { title: "GIVE MORE", desc: "Promotes compassion in city life. Found on trash can, message contrasts setting to encourage giving." }
+];
+let apCurrent = 0;
+const apTrackEl = document.getElementById('apTrack');
+const apNumEl = document.getElementById('apNum');
+const apTitleEl = document.getElementById('apTitle');
+const apDescEl = document.getElementById('apDesc');
+const apDotsEl = document.getElementById('apDots');
+
+apData.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.style.cssText = `width:5px;height:5px;border-radius:50%;background:${i===0?'white':'rgba(255,255,255,0.3)'};cursor:pointer;transition:background .2s;flex-shrink:0;`;
+  d.onclick = () => goToAP(i);
+  apDotsEl.appendChild(d);
+});
+
+function goToAP(idx) {
+  apCurrent = (idx + apData.length) % apData.length;
+  apTrackEl.style.transform = `translateX(-${apCurrent * 100}%)`;
+  apNumEl.textContent = `Image ${apCurrent + 1} of 15`;
+  apTitleEl.textContent = apData[apCurrent].title;
+  apDescEl.textContent = apData[apCurrent].desc;
+  apDotsEl.querySelectorAll('div').forEach((d, i) => d.style.background = i === apCurrent ? 'white' : 'rgba(255,255,255,0.3)');
+}
+function slideAP(dir) { goToAP(apCurrent + dir); }
+
+// Reveal on scroll
 const obs = new IntersectionObserver(entries => {
   entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 80); obs.unobserve(e.target); } });
 }, { threshold: 0.08 });
