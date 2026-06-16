@@ -1,4 +1,4 @@
-# myreen-portfolio (WIP)
+# Myreen's Portfolio (WIP)
 
 Personal portfolio site built with HTML/CSS. 
 
