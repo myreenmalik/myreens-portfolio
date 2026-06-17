@@ -69,8 +69,51 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .back-link:hover { color: var(--black); }
 .back-link:hover::before { transform: translateX(-4px); }
 footer { padding: 24px 48px; display: flex; justify-content: space-between; border-top: 1px solid var(--border); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); }
+.ap-art-layout { display: grid; grid-template-columns: 1fr 340px; gap: 2px; background: var(--border); }
+.ap-art-viewer { background: var(--bg); position: relative; overflow: hidden; height: 500px; }
+.ap-art-track { display: flex; height: 100%; transition: transform .4s ease; will-change: transform; }
+.ap-art-slide { min-width: 100%; height: 100%; flex-shrink: 0; }
+.ap-art-slide img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
+.ap-art-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(10,10,10,0.5); color: white; border: none; font-size: 18px; padding: 10px 14px; cursor: pointer; z-index: 10; }
+.ap-art-btn.prev { left: 0; }
+.ap-art-btn.next { right: 0; }
+.ap-art-info { background: var(--black); padding: 48px 36px; display: flex; flex-direction: column; justify-content: center; }
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.in { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  nav { padding: 20px 24px; }
+  .nav-links { gap: 20px; }
+  .page-hero { flex-direction: column; align-items: flex-start; gap: 24px; padding: 120px 24px 48px; }
+  .page-meta { text-align: left; max-width: none; }
+  .gallery-section { padding: 56px 24px; }
+  .graphic-grid { grid-template-columns: 1fr 1fr; }
+  .graphic-item:last-child:nth-child(3n+1) { grid-column: auto; }
+  .carousel-slide { flex: 0 0 calc(50% - 2px); }
+  .masonry { columns: 2; }
+  .ap-art-layout { grid-template-columns: 1fr; }
+  .ap-art-viewer { height: 400px; }
+  .back-nav { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px; }
+  footer { padding: 20px 24px; }
+}
+@media (max-width: 640px) {
+  body { cursor: auto; }
+  .cursor { display: none; }
+  nav { padding: 16px 20px; }
+  .nav-links { gap: 16px; }
+  .page-hero { padding: 100px 20px 40px; }
+  .page-title { font-size: clamp(72px, 24vw, 140px); }
+  .gallery-section { padding: 48px 20px; }
+  .graphic-grid { grid-template-columns: 1fr; }
+  .carousel-slide { flex: 0 0 100%; }
+  .masonry { columns: 1; }
+  .ap-art-viewer { height: 320px; }
+  .ap-art-info { padding: 28px 20px; }
+  .ap-art-info #apTitle { font-size: 28px !important; }
+  .carousel-btn { cursor: pointer; }
+  .back-nav > div { flex-direction: column; gap: 16px; }
+  footer { flex-direction: column; gap: 8px; }
+}
 </style>
 </head>
 <body>
@@ -144,29 +187,29 @@ footer { padding: 24px 48px; display: flex; justify-content: space-between; bord
   <div class="photo-subsection reveal">
     <div class="photo-subsection-heading">AP ART</div>
     <p class="photo-subsection-sub">2-D Art & Design · Sustained Investigation — urban life, joy and struggle in Austin</p>
-    <div style="display:grid;grid-template-columns:1fr 340px;gap:2px;background:var(--border);">
-      <div style="background:var(--bg);position:relative;overflow:hidden;height:500px;">
-        <div id="apTrack" style="display:flex;height:100%;transition:transform .4s ease;will-change:transform;">
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/myreenmalik3p.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/IMG_6956.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/IMG_6353.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/IMG_6719.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/IMG_6673.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/IMG_6284.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/IMG_6511.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/IMG_6491.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/myreenmalik10ss.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/IMG_6470.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/IMG_7173.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/IMG_6653.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/IMG_6868.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/IMG_7216.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
-          <div style="min-width:100%;height:100%;flex-shrink:0;"><img src="images/UPLOAD/IMG_7290.jpg" alt="" onclick="openLightbox(this.src)" style="width:100%;height:100%;object-fit:cover;display:block;cursor:pointer;"></div>
+    <div class="ap-art-layout">
+      <div class="ap-art-viewer">
+        <div id="apTrack" class="ap-art-track">
+          <div class="ap-art-slide"><img src="images/UPLOAD/myreenmalik3p.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/IMG_6956.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/IMG_6353.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/IMG_6719.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/IMG_6673.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/IMG_6284.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/IMG_6511.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/IMG_6491.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/myreenmalik10ss.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/IMG_6470.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/IMG_7173.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/IMG_6653.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/IMG_6868.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/IMG_7216.jpg" alt="" onclick="openLightbox(this.src)"></div>
+          <div class="ap-art-slide"><img src="images/UPLOAD/IMG_7290.jpg" alt="" onclick="openLightbox(this.src)"></div>
         </div>
-        <button onclick="slideAP(-1)" style="position:absolute;left:0;top:50%;transform:translateY(-50%);background:rgba(10,10,10,0.5);color:white;border:none;font-size:18px;padding:10px 14px;cursor:pointer;z-index:10;">‹</button>
-        <button onclick="slideAP(1)" style="position:absolute;right:0;top:50%;transform:translateY(-50%);background:rgba(10,10,10,0.5);color:white;border:none;font-size:18px;padding:10px 14px;cursor:pointer;z-index:10;">›</button>
+        <button class="ap-art-btn prev" onclick="slideAP(-1)">‹</button>
+        <button class="ap-art-btn next" onclick="slideAP(1)">›</button>
       </div>
-      <div style="background:var(--black);padding:48px 36px;display:flex;flex-direction:column;justify-content:center;">
+      <div class="ap-art-info">
         <div id="apNum" style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Image 1 of 15</div>
         <div id="apTitle" style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:white;line-height:1;margin-bottom:20px;">INCARCERATION</div>
         <div id="apDesc" style="font-size:12px;line-height:1.8;color:rgba(255,255,255,0.65);">Represents incarceration in urban life. Used shadows and framing to create a confined mood.</div>
@@ -231,22 +274,36 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbo
 const track = document.getElementById('carouselTrack');
 const slides = track.querySelectorAll('.carousel-slide');
 const dotsContainer = document.getElementById('carouselDots');
-const perView = 3;
 const total = slides.length;
 let current = 0;
-for (let i = 0; i < Math.ceil(total / perView); i++) {
-  const dot = document.createElement('div');
-  dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-  dotsContainer.appendChild(dot);
+
+function getPerView() {
+  if (window.innerWidth <= 640) return 1;
+  if (window.innerWidth <= 900) return 2;
+  return 3;
 }
+
+function buildDots() {
+  dotsContainer.innerHTML = '';
+  const perView = getPerView();
+  for (let i = 0; i < Math.ceil(total / perView); i++) {
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dotsContainer.appendChild(dot);
+  }
+}
+buildDots();
+
 function goTo(idx) {
+  const perView = getPerView();
   current = Math.max(0, Math.min(idx, total - perView));
   const slideWidth = slides[0].offsetWidth + 2;
   track.style.transform = `translateX(-${current * slideWidth}px)`;
   document.querySelectorAll('#carouselDots .carousel-dot').forEach((d, i) => { d.classList.toggle('active', i === Math.floor(current / perView)); });
 }
-document.getElementById('nextBtn').addEventListener('click', () => goTo(current + perView));
-document.getElementById('prevBtn').addEventListener('click', () => goTo(current - perView));
+document.getElementById('nextBtn').addEventListener('click', () => goTo(current + getPerView()));
+document.getElementById('prevBtn').addEventListener('click', () => goTo(current - getPerView()));
+window.addEventListener('resize', () => { buildDots(); goTo(current); });
 
 // AP Art carousel
 const apData = [
