@@ -72,8 +72,10 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; j
 .contact-heading { font-family: var(--display); font-size: clamp(64px, 12vw, 160px); line-height: 0.88; margin-bottom: 56px; }
 .contact-heading span { color: var(--accent); }
 .contact-links { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
-.cta-link { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 4px; transition: color .2s, border-color .2s; }
+.cta-link { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 4px; transition: color .2s, border-color .2s; cursor: pointer; }
 .cta-link:hover { color: var(--accent); border-color: var(--accent); }
+.toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); background: var(--black); color: white; padding: 14px 28px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; z-index: 10000; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+.toast.show { opacity: 1; }
 footer { padding: 24px 48px; display: flex; justify-content: space-between; border-top: 1px solid var(--border); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray); }
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.in { opacity: 1; transform: none; }
@@ -183,13 +185,32 @@ footer { padding: 24px 48px; display: flex; justify-content: space-between; bord
   <p class="contact-pre">Got a project? Let's talk.</p>
   <h2 class="contact-heading reveal">LET'S<br><span>BUILD.</span></h2>
   <div class="contact-links">
-    <a class="cta-link" href="mailto:myreenmalik@utexas.edu">Email Me</a>
+    <a class="cta-link" id="emailLink" href="mailto:myreenmalik@utexas.edu?subject=Portfolio%20Inquiry">Email Me</a>
     <a class="cta-link" href="https://linkedin.com/in/myreenmalik" target="_blank">LinkedIn</a>
     <a class="cta-link" href="https://github.com/myreenmalik" target="_blank">GitHub</a>
   </div>
 </section>
-<footer><span>© 2026 Myreen Malik</span><span>Built with intention.</span></footer>
+<footer><span>© 2026 Myreen Malik</span><span>Austin, Texas</span></footer>
+<div class="toast" id="toast"></div>
 <script>
+const EMAIL = 'myreenmalik@utexas.edu';
+const toast = document.getElementById('toast');
+let toastTimer;
+
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+}
+
+document.getElementById('emailLink').addEventListener('click', (e) => {
+  e.preventDefault();
+  window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent('Portfolio Inquiry')}`;
+  navigator.clipboard.writeText(EMAIL).catch(() => {});
+  showToast('Email copied');
+});
+
 const cur = document.getElementById('cur');
 document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
 document.querySelectorAll('a, .split-card').forEach(el => {
